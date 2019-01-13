@@ -22,7 +22,7 @@ class Types extends \Object\Data {
 		//13 => ['ss_servassigntype_name' => 'Postal Codes', 'ss_servassigntype_icon' => 'far fa-compass', 'ss_servassigntype_parent' => 10],
 		//17 => ['ss_servassigntype_name' => 'Counties', 'ss_servassigntype_icon' => 'fab fa-shirtsinbulk', 'ss_servassigntype_parent' => 10],
 		//20 => ['ss_servassigntype_name' => 'Postal Codes', 'ss_servassigntype_icon' => 'far fa-compass'],
-		30 => ['ss_servassigntype_name' => 'Customer / Locations', 'ss_servassigntype_icon' => 'fas fa-coffee'],
+		30 => ['ss_servassigntype_name' => 'Customer / Locations', 'ss_servassigntype_icon' => 'fas fa-warehouse'],
 		//40 => ['ss_servassigntype_name' => 'Geo Areas', 'ss_servassigntype_icon' => 'fas fa-images'],
 		// todo
 		50 => ['ss_servassigntype_name' => 'No Assignment', 'ss_servassigntype_icon' => 'fas fa-leaf'],

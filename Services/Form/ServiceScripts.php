@@ -198,19 +198,19 @@ class ServiceScripts extends \Object\Form\Wrapper\Base {
 			// informtion must have description
 			if ($v['ss_servquestion_type_code'] == 'information') {
 				if (empty($v['\Numbers\Services\Services\Model\ServiceScript\Question\Description']['ss_servquesdesc_description'])) {
-					$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\ServiceScript\Questions[{$k}][\Numbers\Services\Services\Model\ServiceScript\Question\Description][on_servquesdesc_description]");
+					$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\ServiceScript\Questions[{$k}][\Numbers\Services\Services\Model\ServiceScript\Question\Description][ss_servquesdesc_description]");
 				}
 			}
 			// selects must have answers or model
 			if (in_array($v['ss_servquestion_type_code'], ['select', 'multiselect'])) {
 				if (empty($v['ss_servquestion_model_id']) && empty($v['\Numbers\Services\Services\Model\ServiceScript\Question\Answers'])) {
-					$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\ServiceScript\Questions[{$k}][on_servquestion_model_id]");
-					$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\ServiceScript\Questions[{$k}][\Numbers\Services\Services\Model\ServiceScript\Question\Answers][1][on_servquesanswer_name]");
+					$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\ServiceScript\Questions[{$k}][ss_servquestion_model_id]");
+					$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\ServiceScript\Questions[{$k}][\Numbers\Services\Services\Model\ServiceScript\Question\Answers][1][ss_servquesanswer_name]");
 				}
 			}
-			if (in_array($v['ss_servquestion_type_code'], ['price_select', 'price_multiselect'])) {
+			if (in_array($v['ss_servquestion_type_code'], ['price_select', 'price_multiselect', 'radiobox', 'checkbox'])) {
 				if (empty($v['\Numbers\Services\Services\Model\ServiceScript\Question\Answers'])) {
-					$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\ServiceScript\Questions[{$k}][\Numbers\Services\Services\Model\ServiceScript\Question\Answers][1][on_servquesanswer_name]");
+					$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\ServiceScript\Questions[{$k}][\Numbers\Services\Services\Model\ServiceScript\Question\Answers][1][ss_servquesanswer_name]");
 				}
 			}
 		}

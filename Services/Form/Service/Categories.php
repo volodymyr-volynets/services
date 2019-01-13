@@ -24,13 +24,13 @@ class Categories extends \Object\Form\Wrapper\Base {
 			'ss_servcategory_id' => [
 				'ss_servcategory_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Category #', 'domain' => 'category_id_sequence', 'percent' => 50, 'navigation' => true],
 				'ss_servcategory_code' => ['order' => 2, 'label_name' => 'Code', 'domain' => 'group_code', 'required' => true, 'percent' => 45, 'navigation' => true],
-				'ss_servcategory_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+				'ss_servcategory_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			],
 			'ss_servcategory_name' => [
 				'ss_servcategory_name' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 100, 'required' => true],
 			],
 			'ss_servcategory_organization_id' => [
-				'ss_servcategory_organization_id' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Organization', 'domain' => 'organization_id', 'null' => true, 'percent' => 50, 'required' => true, 'method' => 'select', 'options_model' => '\\Numbers\Users\Organizations\Model\Organizations::optionsActive'],
+				'ss_servcategory_organization_id' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Organization', 'domain' => 'organization_id', 'null' => true, 'percent' => 50, 'required' => true, 'method' => 'select', 'tree' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Organizations::optionsGroupedActive', 'options_params' => ['on_organization_subtype_id' => 10]],
 				'ss_servcategory_icon' => ['order' => 2, 'label_name' => 'Icon', 'domain' => 'icon', 'null' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Frontend\HTML\FontAwesome\Model\Icons::options', 'searchable' => true],
 			],
 		],
