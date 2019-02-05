@@ -26,6 +26,7 @@ class Types extends \Object\Data {
 		// pricing
 		'price_select' => ['ss_servquestype_name' => 'Price Select'],
 		'price_multiselect' => ['ss_servquestype_name' => 'Price Select (Multiple)'],
+		'price_amount' => ['ss_servquestype_name' => 'Price Amount'],
 		// calendars
 		'cal_date' => ['ss_servquestype_name' => 'Calendar Date'],
 		'cal_datetime' => ['ss_servquestype_name' => 'Calendar Datetime'],

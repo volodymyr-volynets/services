@@ -239,7 +239,7 @@ class ServiceScripts extends \Object\Form\Wrapper\Base {
 
 	public function overrideTabs(& $form, & $tab_options, & $tab_name, & $neighbouring_values = []) {
 		if ($tab_name == '\Numbers\Services\Services\Model\ServiceScript\Question\Answers') {
-			if (in_array($neighbouring_values['ss_servquestion_type_code'] ?? '', ['information', 'input', 'textarea', 'boolean', 'cal_date', 'cal_datetime', 'cal_time'])) {
+			if (in_array($neighbouring_values['ss_servquestion_type_code'] ?? '', ['information', 'input', 'textarea', 'boolean', 'cal_date', 'cal_datetime', 'cal_time', 'price_amount'])) {
 				return ['hidden' => true];
 			}
 		}

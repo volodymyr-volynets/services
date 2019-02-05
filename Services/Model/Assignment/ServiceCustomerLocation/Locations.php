@@ -21,6 +21,7 @@ class Locations extends \Object\Table {
 		'ss_servcustloc_organization_id' => ['name' => 'Primary Organization #', 'domain' => 'organization_id'],
 		'ss_servcustloc_service_id' => ['name' => 'Service #', 'domain' => 'service_id'],
 		'ss_servcustloc_customer_organization_id' => ['name' => 'Customer Organization #', 'domain' => 'organization_id'],
+		'ss_servcustloc_priority_percent' => ['name' => 'Priority Percent', 'domain' => 'amount'],
 		'ss_servcustloc_inactive' => ['name' => 'Inactive', 'type' => 'boolean']
 	];
 	public $constraints = [

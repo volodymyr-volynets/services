@@ -35,16 +35,34 @@ class ServiceCustomerLocation {
 		$parent->elements['assignment_tabs']['assignment_tabs_service_customer_location']['assignment_tabs_service_customer_location'] = ['container' => 'service_customer_location_assignment_container', 'order' => 100];
 		$parent->elements['service_customer_location_assignment_container'] = [
 			'row1' => [
-				'ss_servcustloc_organization_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Primary Organization', 'domain' => 'organization_id', 'null' => true, 'required' => true, 'percent' => 95, 'method' => 'select', 'tree' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Organizations::optionsGroupedActive', 'options_params' => ['on_organization_subtype_id' => 10], 'onchange' => 'this.form.submit();'],
-				'ss_servcustloc_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
-			],
-			'row2' => [
-				'ss_servcustloc_service_id' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Services::optionsActive', 'options_depends' => ['ss_service_organization_id' => 'ss_servcustloc_organization_id'], 'options_params' => ['ss_service_assignment_type_id' => 30], 'onchange' => 'this.form.submit();'],
-				'ss_servcustloc_customer_organization_id' => ['order' => 2, 'label_name' => 'Customer Organization', 'domain' => 'organization_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Users\Organizations\Model\Organizations::optionsGroupedActive', 'options_depends' => ['on_organization_parent_organization_id' => 'ss_servcustloc_organization_id'], 'options_params' => ['on_organization_subtype_id' => 20], 'onchange' => 'this.form.submit();'],
+				'ss_servcustloc_customer_organization_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Customer', 'domain' => 'organization_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'tree' => true, 'searchable' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Organizations::optionsJsonActiveCustomers', 'onchange' => 'this.form.submit();', 'json_contains' => ['parent_id' => 'ss_servcustloc_organization_id', 'customer_organization_id' => 'ss_servcustloc_customer_organization_id']],
+				'ss_servcustloc_service_id' => ['order' => 2, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 45, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Services::optionsActive', 'options_depends' => ['ss_service_organization_id' => 'ss_servcustloc_organization_id'], 'options_params' => ['ss_service_assignment_type_id' => 30]],
+				'ss_servcustloc_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			],
 			'row3' => [
-				'\Numbers\Services\Services\Model\Assignment\ServiceCustomerLocation\Map' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Location(s)', 'domain' => 'location_id', 'null' => true, 'required' => true, 'multiple_column' => 'ss_servcustlmap_location_id', 'percent' => 100, 'method' => 'multiselect', 'searchable' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Locations::optionsActive', 'options_depends' => ['on_location_customer_organization_id' => 'ss_servcustloc_customer_organization_id']],
+				'\Numbers\Services\Services\Model\Assignment\ServiceCustomerLocation\Map' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Location(s)', 'domain' => 'location_id', 'null' => true, 'required' => true, 'multiple_column' => 'ss_servcustlmap_location_id', 'percent' => 85, 'method' => 'multiselect', 'searchable' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Locations::optionsActive', 'options_depends' => ['on_location_customer_organization_id' => 'ss_servcustloc_customer_organization_id']],
+				'ss_servcustloc_priority_percent' => ['order' => 2, 'label_name' => 'Priority %', 'domain' => 'amount', 'null' => true, 'required' => 'c', 'percent' => 15, 'format' => '\Format::number'],
+			],
+			\Object\Form\Parent2::HIDDEN => [
+				'ss_servcustloc_organization_id' => ['order_for_defaults' => -32000, 'label_name' => 'Primary Organization', 'domain' => 'organization_id', 'null' => true, 'required' => true, 'method' => 'hidden'],
 			]
 		];
+	}
+
+	public function validate(& $form) {
+		// validate priority %
+		foreach ($form->values['\Numbers\Services\Services\Model\Assignment\ServiceCustomerLocation\Locations'] as $k => $v) {
+			if (empty($v['ss_servcustloc_service_id'])) continue;
+			$ids = \Numbers\Services\Services\DataSource\ServiceScript\PreloadIDs::getStatic([
+				'where' => [
+					'service_id' => $v['ss_servcustloc_service_id']
+				]
+			]);
+			if ($ids['queue_method_id'] == 20) {
+				if (\Math::compare($v['ss_servcustloc_priority_percent'], '0', 2) == 0) {
+					$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\Assignment\ServiceCustomerLocation\Locations[{$k}][ss_servcustloc_priority_percent]");
+				}
+			}
+		}
 	}
 }

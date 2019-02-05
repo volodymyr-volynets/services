@@ -39,6 +39,7 @@ class ServiceScripts extends \Object\DataSource {
 			'required' => 'a.ss_servquestion_required',
 			'inactive' => 'a.ss_servquestion_inactive',
 			'description' => 'b.ss_servquesdesc_description',
+			'order' => 'a.ss_servquestion_order',
 			'answers' => 'c.answers'
 		]);
 		// join
@@ -117,7 +118,7 @@ class ServiceScripts extends \Object\DataSource {
 				$model = new $class();
 				$temp = $model->options();
 				foreach ($temp as $k2 => $v2) {
-					$data[$k]['answers'][$v2['name']] = [
+					$data[$k]['answers'][$k2] = [
 						'name' => $v2['name'],
 						'order' => 0,
 						'price' => 0
