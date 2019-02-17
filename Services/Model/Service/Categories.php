@@ -18,18 +18,11 @@ class Categories extends \Object\Table {
 		'ss_servcategory_code' => ['name' => 'Code', 'domain' => 'group_code'],
 		'ss_servcategory_name' => ['name' => 'Name', 'domain' => 'name'],
 		'ss_servcategory_icon' => ['name' => 'Icon', 'domain' => 'icon', 'null' => true],
-		'ss_servcategory_organization_id' => ['name' => 'Organization #', 'domain' => 'organization_id'],
 		'ss_servcategory_inactive' => ['name' => 'Inactive', 'type' => 'boolean']
 	];
 	public $constraints = [
 		'ss_service_categories_pk' => ['type' => 'pk', 'columns' => ['ss_servcategory_tenant_id', 'ss_servcategory_id']],
 		'ss_servcategory_code_un' => ['type' => 'unique', 'columns' => ['ss_servcategory_tenant_id', 'ss_servcategory_code']],
-		'ss_servcategory_organization_id_fk' => [
-			'type' => 'fk',
-			'columns' => ['ss_servcategory_tenant_id', 'ss_servcategory_organization_id'],
-			'foreign_model' => '\Numbers\Users\Organizations\Model\Organizations',
-			'foreign_columns' => ['on_organization_tenant_id', 'on_organization_id']
-		]
 	];
 	public $indexes = [];
 	public $history = false;

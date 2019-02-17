@@ -16,5 +16,6 @@ class Types extends \Object\Data {
 	];
 	public $data = [
 		'CANCELATION_REASONS' => ['ss_disptype_name' => 'Cancellation Reasons'],
+		'OTHER_REASONS' => ['ss_disptype_name' => 'Other'],
 	];
 }

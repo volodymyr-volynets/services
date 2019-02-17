@@ -26,7 +26,7 @@ class Helper {
 	 * @param string $channel_code
 	 * @throws \Exception
 	 */
-	public static function renderQuestions(& $form, int $service_id, int $location_id, string $channel_code) {
+	public static function renderQuestions(& $form, int $service_id, int $location_id, string $channel_code, string $language_code) {
 		if (!isset(self::$cached_all_models)) {
 			self::$cached_all_models = \Numbers\Backend\Db\Common\Model\Models::getStatic([
 				'pk' => ['sm_model_id']
@@ -47,6 +47,7 @@ class Helper {
 				'service_script_id' => $ids['service_script_id'],
 				'channel_id' => $ids['service_channel_id'],
 				'region_id' => $ids['location_region_id'],
+				'language_code' => $language_code,
 			]
 		]);
 		if (empty($questions)) return;
@@ -77,11 +78,11 @@ class Helper {
 				'row_order' => $order,
 				'type' => 'text',
 				'method' => 'div',
-				'value' => '<b>' . \Format::id($counter) . '. ' . i18n(null, $v['name']) . '</b>' . $mandatory,
+				'value' => '<b>' . \Format::id($counter) . '. ' . $v['name'] . '</b>' . $mandatory,
 				'percent' => 100,
 			];
 			// answers
-			$description = isset($v['description']) ? i18n(null, $v['description']) : null;
+			$description = nl2br($v['description']);
 			switch ($v['type']) {
 				case 'information':
 					$form->elements['service_script_container']['ss_field_answer_' . $k]['ss_field_answer_' . $k] = [
@@ -89,7 +90,7 @@ class Helper {
 						'row_order' => $order + 1,
 						'type' => 'text',
 						'method' => 'div',
-						'value' => i18n(null, $v['description']),
+						'value' => $description,
 						'percent' => 100,
 					];
 					break;
@@ -198,7 +199,8 @@ class Helper {
 							'label_name' => '',
 							'type' => 'boolean',
 							'percent' => 100,
-							'html_table_description' => i18n(null, $k2),
+							'html_table_description' => $k2,
+							'required' => $v['required'],
 							'description' => ($k2 == $last_key) ? $description : null,
 						];
 						$inner_counter++;
@@ -214,6 +216,7 @@ class Helper {
 						'percent' => 100,
 						// radio boxes require options
 						'options' => $v['answers'],
+						'required' => $v['required'],
 						'description' => $description,
 					];
 					break;
@@ -225,6 +228,7 @@ class Helper {
 						'type' => 'boolean',
 						'method' => 'checkbox',
 						'percent' => 100,
+						'required' => $v['required'],
 						'description' => $description,
 					];
 					break;
@@ -248,7 +252,8 @@ class Helper {
 				'row_order' => PHP_INT_MAX,
 				'label_name' => '',
 				'type' => 'text',
-				'null' => false,
+				'null' => true,
+				'default' => null,
 				'method' => 'input',
 				'percent' => 100,
 				'required' => false,
@@ -272,12 +277,66 @@ class Helper {
 	 * @param object $form
 	 * @return array
 	 */
-	public static function extractServiceScriptAnswers(& $form, $total_field) : array {
-		if (!empty($total_field)) {
-			$temp = array_key_extract_by_prefix($form->values, 'wg_ss_total_');
-			$form->values[$total_field] = $temp['amount'];
-			// todo: recalculate total
+	public static function extractServiceScriptAnswers(& $form) : array {
+		$total = array_key_extract_by_prefix($form->values, 'wg_ss_total_');
+		// we need to unset empty answers
+		$answers = array_key_extract_by_prefix($form->values, 'ss_field_answer_') ?? [];
+		foreach ($answers as $k => $v) {
+			if ($v === '' || !isset($v)) {
+				unset($answers[$k]);
+			}
 		}
-		return array_key_extract_by_prefix($form->values, 'ss_field_answer_');
+		return [
+			'success' => true,
+			'error' => [],
+			'total' => $total['amount'] ?? null,
+			'answers' => $answers,
+		];
+	}
+
+	/**
+	 * Render as text
+	 *
+	 */
+	public static function renderAsText(int $service_script_id, int $service_channel_id, int $location_region_id, string $language_code, array $answers, string $total = '') : string {
+		// load questions
+		$questions = \Numbers\Services\Services\DataSource\ServiceScripts::getStatic([
+			'where' => [
+				'service_script_id' => $service_script_id,
+				'channel_id' => $service_channel_id,
+				'region_id' => $location_region_id,
+				'language_code' => $language_code,
+			]
+		]);
+		$result = '';
+		foreach ($questions as $k => $v) {
+			$result.= i18n(null, 'Q:') . ' ' . $v['name'] . "\n";
+			if (isset($answers[$k])) {
+				if ($v['type'] == 'price_amount') {
+					$result.= i18n(null, 'A:') . ' ' . trim(\Format::number($answers[$k])) . "\n";
+				} else if ($v['type'] == 'price_multiselect' || $v['type'] == 'multiselect') {
+					$result.= i18n(null, 'A:') . ' ';
+					$temp = [];
+					foreach ($answers[$k] as $k2 => $v2) {
+						$temp2 = $v['answers'][$k2]['name'];
+						if ($v['type'] == 'price_multiselect') {
+							$temp2.= ' (' . trim(\Format::number($v['answers'][$k2]['price'])) . ')';
+						}
+						$temp[] = $temp2;
+					}
+					$result.= implode("\n", $temp) . "\n";
+				} else if ($v['type'] == 'price_select') {
+					$result.= i18n(null, 'A:') . ' ' . $v['answers'][$answers[$k]]['name'] . ' (' . trim(\Format::number($v['answers'][$answers[$k]]['price'])) . ")\n";
+				} else {
+					$result.= i18n(null, 'A:') . ' ' . $answers[$k] . "\n";
+				}
+			}
+			$result.= "\n";
+		}
+		// total
+		if (\Math::compare($total, 0) != 0) {
+			$result.= i18n(null, 'T:') . ' ' . \Format::number($total) . "\n";
+		}
+		return $result;
 	}
 }

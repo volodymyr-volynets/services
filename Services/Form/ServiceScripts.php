@@ -105,12 +105,13 @@ class ServiceScripts extends \Object\Form\Wrapper\Base {
 		],
 		'questions_container' => [
 			'row1' => [
-				'ss_servquestion_name' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Question', 'domain' => 'name', 'null' => true, 'required' => true, 'placeholder' => 'Question', 'percent' => 95],
-				'ss_servquestion_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+				'ss_servquestion_name' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Question', 'domain' => 'description', 'null' => true, 'required' => true, 'placeholder' => 'Question', 'percent' => 95],
+				'ss_servquestion_type_code' => ['order' => 2, 'label_name' => 'Type', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 30, 'validator_method' => '', 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\ServiceScript\Question\Types', 'onchange' => 'this.form.submit();'],
+				'ss_servquestion_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			],
 			'row2' => [
 				'ss_servquestion_order' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Order', 'domain' => 'order', 'null' => true, 'required' => true, 'percent' => 25],
-				'ss_servquestion_type_code' => ['order' => 2, 'label_name' => 'Type', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 30, 'validator_method' => '', 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\ServiceScript\Question\Types', 'onchange' => 'this.form.submit();'],
+				'ss_servquestion_language_code' => ['order' => 2, 'label_name' => 'Language', 'domain' => 'language_code', 'null' => true, 'required' => true, 'percent' => 30, 'method' => 'select', 'options_model' => '\Numbers\Internalization\Internalization\Model\Language\Codes::optionsActive', 'options_params' => ['in_language_code;<>' => 'sm0']],
 				'ss_servquestion_required' => ['order' => 3, 'label_name' => 'Required', 'type' => 'boolean', 'percent' => 15],
 				'ss_servquestion_all_regions' => ['order' => 4, 'label_name' => 'All Regions', 'type' => 'boolean', 'default' => 1, 'percent' => 15, 'onchange' => 'this.form.submit();'],
 				'ss_servquestion_all_channels' => ['order' => 5, 'label_name' => 'All Channels', 'type' => 'boolean', 'default' => 1, 'percent' => 15, 'onchange' => 'this.form.submit();'],
@@ -195,12 +196,6 @@ class ServiceScripts extends \Object\Form\Wrapper\Base {
 	public function validate(& $form) {
 		// validate questions
 		foreach ($form->values['\Numbers\Services\Services\Model\ServiceScript\Questions'] as $k => $v) {
-			// informtion must have description
-			if ($v['ss_servquestion_type_code'] == 'information') {
-				if (empty($v['\Numbers\Services\Services\Model\ServiceScript\Question\Description']['ss_servquesdesc_description'])) {
-					$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\ServiceScript\Questions[{$k}][\Numbers\Services\Services\Model\ServiceScript\Question\Description][ss_servquesdesc_description]");
-				}
-			}
 			// selects must have answers or model
 			if (in_array($v['ss_servquestion_type_code'], ['select', 'multiselect'])) {
 				if (empty($v['ss_servquestion_model_id']) && empty($v['\Numbers\Services\Services\Model\ServiceScript\Question\Answers'])) {

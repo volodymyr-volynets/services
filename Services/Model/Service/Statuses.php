@@ -21,6 +21,7 @@ class Statuses extends \Object\Table {
 		'ss_servstatus_icon' => ['name' => 'Icon', 'domain' => 'icon', 'null' => true],
 		'ss_servstatus_order' => ['name' => 'Order', 'domain' => 'order'],
 		'ss_servstatus_red_flag' => ['name' => 'Red Flag', 'type' => 'boolean'],
+		'ss_servstatus_is_action' => ['name' => 'Is Action', 'type' => 'boolean'],
 		'ss_servstatus_parent_servstatus_code' => ['name' => 'Parent Status Code', 'domain' => 'group_code', 'null' => true],
 		'ss_servstatus_inactive' => ['name' => 'Inactive', 'type' => 'boolean']
 	];

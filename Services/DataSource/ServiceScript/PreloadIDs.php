@@ -16,7 +16,7 @@ class PreloadIDs extends \Object\DataSource {
 
 	public $cache = true;
 	public $cache_tags = [];
-	public $cache_memory = false;
+	public $cache_memory = true;
 
 	public $primary_model = '\Numbers\Services\Services\Model\Services';
 	public $parameters = [

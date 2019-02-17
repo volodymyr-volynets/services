@@ -51,7 +51,7 @@ class DateTypes extends \Object\Form\Wrapper\List2 {
 				'ss_servdatetype_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Code', 'domain' => 'group_code', 'percent' => 25, 'url_edit' => true],
 				'ss_servdatetype_name' => ['order' => 2, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 50],
 				'ss_servdatetype_filterable' => ['order' => 3, 'label_name' => 'Filterable', 'type' => 'boolean', 'percent' => 20],
-				'ss_servtype_inactive' => ['order' => 4, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+				'ss_servdatetype_inactive' => ['order' => 4, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			]
 		]
 	];

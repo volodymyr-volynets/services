@@ -5,7 +5,7 @@ class ServiceScripts extends \Object\Table {
 	public $db_link;
 	public $db_link_flag;
 	public $name = null;
-	public $pk = [];
+	public $pk = ['wg_ss_tenant_id', 'wg_ss_id'];
 	public $tenant = true;
 	public $module;
 	public $orderby;
@@ -39,11 +39,15 @@ class ServiceScripts extends \Object\Table {
 	public function __construct($class, $virtual_class_name, $options = []) {
 		// add regular columns
 		$this->columns['wg_ss_tenant_id'] = ['name' => 'Tenant #', 'domain' => 'tenant_id'];
+		$this->columns['wg_ss_id'] = ['name' => 'Service Script #', 'domain' => 'big_id_sequence'];
 		$this->determineModelMap($class, 'service_scripts', $virtual_class_name, $options);
-		$this->columns['wg_ss_service_script_id'] = ['name' => 'Service Script #', 'domain' => 'service_script_id'];
-		$this->columns['wg_ss_answers'] = ['name' => 'Answers', 'type' => 'json'];
+		$this->columns['wg_ss_service_script_id'] = ['name' => 'Service Script #', 'domain' => 'service_script_id', 'null' => true];
+		$this->columns['wg_ss_channel_id'] = ['name' => 'Channel #', 'domain' => 'channel_id', 'null' => true];
+		$this->columns['wg_ss_region_id'] = ['name' => 'Region #', 'domain' => 'region_id', 'null' => true];
+		$this->columns['wg_ss_language_code'] = ['name' => 'Language Code', 'domain' => 'language_code', 'null' => true];
+		$this->columns['wg_ss_answers'] = ['name' => 'Answers', 'type' => 'json', 'null' => true];
+		$this->columns['wg_ss_legacy_answers'] = ['name' => 'Answers (Legacy)', 'type' => 'text', 'null' => true];
 		$this->columns['wg_ss_total_amount'] = ['name' => 'Total Amount', 'domain' => 'amount'];
-		$this->pk = array_merge(array_values($this->map), ['wg_ss_service_script_id']);
 		// add constraints
 		$this->constraints[$this->name . '_pk'] = [
 			'type' => 'pk',

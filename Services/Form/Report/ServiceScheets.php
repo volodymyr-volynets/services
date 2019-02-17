@@ -33,11 +33,12 @@ class ServiceScheets extends \Object\Form\Wrapper\Report {
 				'service_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Services::optionsActive'],
 			],
 			'channel_id' => [
-				'channel_id' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Channel', 'domain' => 'channel_id', 'null' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Channels::optionsActive'],
-				'region_id' => ['order' => 2, 'label_name' => 'Region', 'domain' => 'region_id', 'null' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Users\Organizations\Model\Regions::optionsActive'],
+				'channel_id' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Channel', 'domain' => 'channel_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Channels::optionsActive'],
+				'region_id' => ['order' => 2, 'label_name' => 'Region', 'domain' => 'region_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Users\Organizations\Model\Regions::optionsActive'],
 			],
 			'type_code' => [
 				'type_code' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Sheet Type', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\ServiceSheet\Types'],
+				'language_code' => ['order' => 2, 'label_name' => 'Language', 'domain' => 'language_code', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Internalization\Internalization\Model\Language\Codes::optionsActive', 'options_params' => ['in_language_code;<>' => 'sm0']],
 			]
 		],
 		self::REPORT_BUTTONS => self::REPORT_BUTTONS_DATA
@@ -170,6 +171,7 @@ class ServiceScheets extends \Object\Form\Wrapper\Report {
 					'service_script_id' => $service['ss_service_service_script_id'],
 					'channel_id' => $form->values['channel_id'],
 					'region_id' => $form->values['region_id'],
+					'language_code' => $form->values['language_code'],
 				]
 			]);
 			$report->addReport(DEF2, $form, [

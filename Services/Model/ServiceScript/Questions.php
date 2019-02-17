@@ -19,8 +19,9 @@ class Questions extends \Object\Table {
 		'ss_servquestion_tenant_id' => ['name' => 'Tenant #', 'domain' => 'tenant_id'],
 		'ss_servquestion_service_script_id' => ['name' => 'Service Script #', 'domain' => 'service_script_id'],
 		'ss_servquestion_id' => ['name' => 'Question #', 'domain' => 'question_id'],
-		'ss_servquestion_name' => ['name' => 'Name', 'domain' => 'name'],
+		'ss_servquestion_name' => ['name' => 'Name', 'domain' => 'description'],
 		'ss_servquestion_order' => ['name' => 'Order', 'domain' => 'order'],
+		'ss_servquestion_language_code' => ['name' => 'Language Code', 'domain' => 'language_code'],
 		'ss_servquestion_type_code' => ['name' => 'Type', 'domain' => 'group_code', 'options_model' => '\Numbers\Services\Services\Model\ServiceScript\Question\Types'],
 		'ss_servquestion_model_id' => ['name' => 'Model #', 'domain' => 'group_id', 'null' => true],
 		'ss_servquestion_required' => ['name' => 'Required', 'type' => 'boolean'],
@@ -30,11 +31,18 @@ class Questions extends \Object\Table {
 	];
 	public $constraints = [
 		'ss_service_script_questions_pk' => ['type' => 'pk', 'columns' => ['ss_servquestion_tenant_id', 'ss_servquestion_service_script_id', 'ss_servquestion_id']],
+		'ss_servquestion_language_code_un' => ['type' => 'unique', 'columns' => ['ss_servquestion_tenant_id', 'ss_servquestion_service_script_id', 'ss_servquestion_order', 'ss_servquestion_language_code']],
 		'ss_servquestion_service_script_id_fk' => [
 			'type' => 'fk',
 			'columns' => ['ss_servquestion_tenant_id', 'ss_servquestion_service_script_id'],
 			'foreign_model' => '\Numbers\Services\Services\Model\ServiceScripts',
 			'foreign_columns' => ['ss_servscript_tenant_id', 'ss_servscript_id']
+		],
+		'ss_servquestion_language_code_fk' => [
+			'type' => 'fk',
+			'columns' => ['ss_servquestion_tenant_id', 'ss_servquestion_language_code'],
+			'foreign_model' => '\Numbers\Internalization\Internalization\Model\Language\Codes',
+			'foreign_columns' => ['in_language_tenant_id', 'in_language_code']
 		]
 	];
 	public $indexes = [

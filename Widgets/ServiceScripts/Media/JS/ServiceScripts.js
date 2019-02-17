@@ -34,7 +34,10 @@ Numbers.Widgets.ServiceScripts = {
 		});
 		$('.numbers_ss_price_select').each(function(index, element) {
 			$(this).find('option').filter(":selected").map(function() {
-				total = Numbers.Math.add(total, $(this).attr('price'), 2);
+				var price = $(this).attr('price');
+				if (price) {
+					total = Numbers.Math.add(total, $(this).attr('price'), 2);
+				}
 			});
 		});
 		$('.wg_ss_script_total_amount').val(Numbers.Format.number(total)).change();

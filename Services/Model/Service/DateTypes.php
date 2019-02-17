@@ -17,6 +17,7 @@ class DateTypes extends \Object\Table {
 		'ss_servdatetype_code' => ['name' => 'Code', 'domain' => 'group_code'],
 		'ss_servdatetype_name' => ['name' => 'Name', 'domain' => 'name'],
 		'ss_servdatetype_filterable' => ['name' => 'Filterable', 'type' => 'boolean'],
+		'ss_servdatetype_readonly' => ['name' => 'Readonly', 'type' => 'boolean'],
 		'ss_servdatetype_inactive' => ['name' => 'Inactive', 'type' => 'boolean']
 	];
 	public $constraints = [

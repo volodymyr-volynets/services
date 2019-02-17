@@ -26,8 +26,9 @@ class ServiceScripts extends \Object\DataSource {
 	public $primary_model = '\Numbers\Services\Services\Model\ServiceScript\Questions';
 	public $parameters = [
 		'service_script_id' => ['name' => 'Service Script #', 'domain' => 'service_script_id', 'required' => true],
-		'channel_id' => ['name' => 'Channel #', 'domain' => 'channel_id'],
-		'region_id' => ['name' => 'Region #', 'domain' => 'region_id'],
+		'channel_id' => ['name' => 'Channel #', 'domain' => 'channel_id', 'required' => true],
+		'region_id' => ['name' => 'Region #', 'domain' => 'region_id', 'required' => true],
+		'language_code' => ['name' => 'Language Code', 'domain' => 'language_code', 'required' => true],
 	];
 
 	public function query($parameters, $options = []) {
@@ -63,6 +64,7 @@ class ServiceScripts extends \Object\DataSource {
 		]);
 		// where
 		$this->query->where('AND', ['a.ss_servquestion_service_script_id', '=', $parameters['service_script_id']]);
+		$this->query->where('AND', ['a.ss_servquestion_language_code', '=', $parameters['language_code']]);
 		$this->query->where('AND', ['a.ss_servquestion_inactive', '=', 0]);
 		// regions
 		$this->query->where('AND', function (& $query) use ($parameters) {

@@ -26,8 +26,9 @@ class DateTypes extends \Object\Form\Wrapper\Base {
 				'ss_servdatetype_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			],
 			'ss_servdatetype_name' => [
-				'ss_servdatetype_name' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 85, 'required' => true],
-				'ss_servdatetype_filterable' => ['order' => 2, 'label_name' => 'Filterable', 'type' => 'boolean', 'percent' => 15]
+				'ss_servdatetype_name' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 70, 'required' => true],
+				'ss_servdatetype_filterable' => ['order' => 2, 'label_name' => 'Filterable', 'type' => 'boolean', 'percent' => 15],
+				'ss_servdatetype_readonly' => ['order' => 3, 'label_name' => 'Readonly', 'type' => 'boolean', 'percent' => 15],
 			]
 		],
 		'buttons' => [

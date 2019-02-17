@@ -21,7 +21,8 @@ class ServiceCustomerLocation {
 					'type' => '1M',
 					'map' => ['ss_servcustloc_tenant_id' => 'ss_servcustlmap_tenant_id', 'ss_servcustloc_user_id' => 'ss_servcustlmap_user_id', 'ss_servcustloc_organization_id' => 'ss_servcustlmap_organization_id', 'ss_servcustloc_service_id' => 'ss_servcustlmap_service_id', 'ss_servcustloc_customer_organization_id' => 'ss_servcustlmap_customer_organization_id'],
 				]
-			]
+			],
+			'max_records' => 5000, // duplicated on purpose
 		];
 		$parent->containers['service_customer_location_assignment_container'] = [
 			'type' => 'details',
@@ -29,14 +30,16 @@ class ServiceCustomerLocation {
 			'details_new_rows' => 1,
 			'details_key' => '\Numbers\Services\Services\Model\Assignment\ServiceCustomerLocation\Locations',
 			'details_pk' => ['ss_servcustloc_organization_id', 'ss_servcustloc_service_id', 'ss_servcustloc_customer_organization_id'],
-			'order' => 35005
+			'order' => 35005,
+			'details_max_records_warning_message' => \Numbers\Services\Services\Helper\Messages::ASSIGNMENT_MAX_ROWS,
+			'details_max_records' => 5000, // duplicated on purpose
 		];
 		$parent->rows['assignment_tabs']['assignment_tabs_service_customer_location'] = ['order' => 200, 'label_name' => 'Customer / Location', 'acl_subresource_hide' => ['SS::USER_SERVCUSTLOCASSIGN']];
 		$parent->elements['assignment_tabs']['assignment_tabs_service_customer_location']['assignment_tabs_service_customer_location'] = ['container' => 'service_customer_location_assignment_container', 'order' => 100];
 		$parent->elements['service_customer_location_assignment_container'] = [
 			'row1' => [
-				'ss_servcustloc_customer_organization_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Customer', 'domain' => 'organization_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'tree' => true, 'searchable' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Organizations::optionsJsonActiveCustomers', 'onchange' => 'this.form.submit();', 'json_contains' => ['parent_id' => 'ss_servcustloc_organization_id', 'customer_organization_id' => 'ss_servcustloc_customer_organization_id']],
-				'ss_servcustloc_service_id' => ['order' => 2, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 45, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Services::optionsActive', 'options_depends' => ['ss_service_organization_id' => 'ss_servcustloc_organization_id'], 'options_params' => ['ss_service_assignment_type_id' => 30]],
+				'ss_servcustloc_customer_organization_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Customer', 'domain' => 'organization_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'tree' => true, 'searchable' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Organizations::optionsJsonActiveCustomers', 'options_options' => ['show_all' => true], 'onchange' => 'this.form.submit();', 'json_contains' => ['parent_id' => 'ss_servcustloc_organization_id', 'customer_organization_id' => 'ss_servcustloc_customer_organization_id']],
+				'ss_servcustloc_service_id' => ['order' => 2, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 45, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\DataSource\Services::optionsActive', 'options_depends' => ['selected_organizations' => 'ss_servcustloc_organization_id'], 'options_params' => ['ss_service_assignment_type_id' => 30]],
 				'ss_servcustloc_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			],
 			'row3' => [
