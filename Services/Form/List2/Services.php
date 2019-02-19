@@ -60,10 +60,14 @@ class Services extends \Object\Form\Wrapper\List2 {
 			],
 			'row2' => [
 				'blank' => ['order' => 1, 'row_order' => 200, 'label_name' => '', 'percent' => 15],
-				'ss_service_type_code' => ['order' => 2, 'row_order' => 200, 'label_name' => 'Service Type', 'domain' => 'group_code', 'percent' => 20, 'options_model' => '\Numbers\Services\Services\Model\Service\Types'],
-				'ss_service_organization_id' => ['order' => 3, 'label_name' => 'Organization', 'domain' => 'organization_id', 'percent' => 25, 'options_model' => '\Numbers\Users\Organizations\Model\Organizations'],
-				'ss_service_assignment_type_id' => ['order' => 4, 'label_name' => 'Assignment Type #', 'domain' => 'type_id', 'percent' => 25, 'options_model' => '\Numbers\Services\Services\Model\Service\Assignment\Types'],
+				'ss_service_type_code' => ['order' => 2, 'row_order' => 200, 'label_name' => 'Service Type', 'domain' => 'group_code', 'percent' => 35, 'options_model' => '\Numbers\Services\Services\Model\Service\Types'],
+				'ss_service_assignment_type_id' => ['order' => 4, 'label_name' => 'Assignment Type #', 'domain' => 'type_id', 'percent' => 35, 'options_model' => '\Numbers\Services\Services\Model\Service\Assignment\Types'],
 				'ss_service_billable' => ['order' => 5, 'label_name' => 'Red Flag', 'type' => 'boolean', 'percent' => 15],
+			],
+			'row3' => [
+				'blank2' => ['order' => 1, 'row_order' => 300, 'label_name' => '', 'percent' => 15],
+				'ss_servorg_organization_id' => ['order' => 2, 'label_name' => 'Organization(s)', 'domain' => 'organization_id', 'percent' => 55, 'options_model' => '\Numbers\Users\Organizations\Model\Organizations', 'subquery' => ['model' => '\Numbers\Services\Services\Model\Service\Organizations', 'alias' => 'inner_a', 'groupby' => 'ss_servorg_service_id', 'on' => [['a.ss_service_id', '=', 'inner_a.ss_servorg_service_id']]]],
+				'ss_service_category_id' => ['order' => 3, 'label_name' => 'Category', 'domain' => 'category_id', 'percent' => 30, 'options_model' => 'Numbers\Services\Services\Model\Service\Categories'],
 			]
 		]
 	];

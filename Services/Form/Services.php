@@ -140,7 +140,7 @@ class Services extends \Object\Form\Wrapper\Base {
 			'ss_service_master_invoice' => [
 				'ss_service_master_invoice' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Master Invoice', 'type' => 'boolean'],
 				'ss_service_billable' => ['order' => 2, 'label_name' => 'Billable', 'type' => 'boolean'],
-			]
+			],
 		],
 		'alt_names_container' => [
 			'row1' => [

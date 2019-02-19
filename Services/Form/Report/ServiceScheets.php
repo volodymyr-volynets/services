@@ -281,6 +281,7 @@ class ServiceScheets extends \Object\Form\Wrapper\Report {
 						]
 					]);
 				} else {
+					$underline = true;
 					$report->addData(DEF2, 'row2', $even, [
 						'name' => [
 							'value' => $v['name'],
