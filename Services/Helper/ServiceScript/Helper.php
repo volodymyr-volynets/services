@@ -24,14 +24,9 @@ class Helper {
 	 * @param int $service_id
 	 * @param int $location_id
 	 * @param string $channel_code
-	 * @throws \Exception
+	 * @return int|null
 	 */
 	public static function renderQuestions(& $form, int $service_id, int $location_id, string $channel_code, string $language_code) {
-		if (!isset(self::$cached_all_models)) {
-			self::$cached_all_models = \Numbers\Backend\Db\Common\Model\Models::getStatic([
-				'pk' => ['sm_model_id']
-			]);
-		}
 		// get all ids
 		$ids = \Numbers\Services\Services\DataSource\ServiceScript\PreloadIDs::getStatic([
 			'where' => [
@@ -40,13 +35,36 @@ class Helper {
 				'channel_code' => $channel_code
 			],
 		]);
-		if (empty($ids) || empty($ids['service_script_id'])) return;
+		if (empty($ids) || empty($ids['service_script_id'])) {
+			return;
+		} else {
+			return self::renderQuestionRaw($form, $ids['service_script_id'], $ids['service_channel_id'], $ids['location_region_id'], $language_code);
+		}
+	}
+
+	/**
+	 * Render questions raw
+	 *
+	 * @param type $form
+	 * @param int $service_script_id
+	 * @param int $service_channel_id
+	 * @param int $location_region_id
+	 * @param string $language_code
+	 * @return int|null
+	 * @throws \Exception
+	 */
+	public static function renderQuestionRaw(& $form, int $service_script_id, int $service_channel_id, int $location_region_id, string $language_code) {
+		if (!isset(self::$cached_all_models)) {
+			self::$cached_all_models = \Numbers\Backend\Db\Common\Model\Models::getStatic([
+				'pk' => ['sm_model_id']
+			]);
+		}
 		// load questions
 		$questions = \Numbers\Services\Services\DataSource\ServiceScripts::getStatic([
 			'where' => [
-				'service_script_id' => $ids['service_script_id'],
-				'channel_id' => $ids['service_channel_id'],
-				'region_id' => $ids['location_region_id'],
+				'service_script_id' => $service_script_id,
+				'channel_id' => $service_channel_id,
+				'region_id' => $location_region_id,
 				'language_code' => $language_code,
 			]
 		]);
@@ -263,7 +281,7 @@ class Helper {
 				'class' => 'wg_ss_script_total_amount',
 				'readonly' => true
 			];
-			// ajax
+			// initialize
 			\Layout::addJs('/numbers/media_submodules/Numbers_Services_Widgets_ServiceScripts_Media_JS_ServiceScripts.js', 45000);
 			\Layout::onLoad('Numbers.Widgets.ServiceScripts.init();');
 		}

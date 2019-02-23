@@ -46,9 +46,15 @@ class ServiceScripts extends \Object\Form\Wrapper\List2 {
 		self::LIST_BUTTONS => self::LIST_BUTTONS_DATA,
 		self::LIST_CONTAINER => [
 			'row1' => [
-				'wg_ss_id' => ['order' => 1, 'row_order' => 100, 'label_name' => '#', 'domain' => 'big_id', 'percent' => 15],
-				'wg_ss_answers' => ['order' => 2, 'label_name' => 'Questions / Answers', 'type' => 'text', 'percent' => 85, 'custom_renderer' => '\Numbers\Services\Widgets\ServiceScripts\Form\List2\ServiceScripts::renderSSValue'],
+				'wg_ss_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'S.S. #', 'domain' => 'big_id', 'percent' => 15, 'url_edit' => true],
+				'wg_ss_service_script_id' => ['order' => 2, 'label_name' => 'Service Script', 'domain' => 'service_script_id', 'null' => true, 'percent' => 35, 'options_model' => '\Numbers\Services\Services\Model\ServiceScripts'],
+				'wg_ss_region_id' => ['order' => 3, 'label_name' => 'Region', 'domain' => 'region_id', 'null' => true, 'percent' => 25, 'options_model' => '\Numbers\Users\Organizations\Model\Regions'],
+				'wg_ss_language_code' => ['order' => 4, 'label_name' => 'Language', 'domain' => 'language_code', 'percent' => 25, 'options_model' => '\Numbers\Internalization\Internalization\Model\Language\Codes'],
 			],
+			'row2' => [
+				'__blank' => ['order' => 1, 'row_order' => 200, 'label_name' => '', 'percent' => 15],
+				'wg_ss_answers' => ['order' => 2, 'label_name' => 'Questions / Answers', 'type' => 'text', 'percent' => 85, 'custom_renderer' => '\Numbers\Services\Widgets\ServiceScripts\Form\List2\ServiceScripts::renderSSValue'],
+			]
 		]
 	];
 	public $query_primary_model;
@@ -62,6 +68,23 @@ class ServiceScripts extends \Object\Form\Wrapper\List2 {
 	];
 	const LIST_SORT_OPTIONS = [
 		'wg_ss_id' => ['name' => 'Service Script #'],
+	];
+	public $subforms = [
+		'wg_edit_service_script' => [
+			'form' => '\Numbers\Services\Widgets\ServiceScripts\Form\EditServiceScript',
+			'label_name' => 'Edit Service Script',
+			'actions' => [
+				'edit' => ['name' => 'Edit', 'url_edit' => true],
+				'delete' => ['name' => 'Delete', 'url_delete' => true],
+			]
+		],
+		'wg_new_service_script' => [
+			'form' => '\Numbers\Services\Widgets\ServiceScripts\Form\NewServiceScript',
+			'label_name' => 'New Service Script',
+			'actions' => [
+				'new' => ['name' => 'New'],
+			]
+		]
 	];
 
 	public function overrides(& $form) {
