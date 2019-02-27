@@ -22,6 +22,8 @@ class Services extends \Object\Table {
 	];
 	public $constraints = [
 		'ss_service_red_flag_services_pk' => ['type' => 'pk', 'columns' => ['ss_servrdflgserv_tenant_id', 'ss_servrdflgserv_servredflag_id', 'ss_servrdflgserv_service_id']],
+		// there can only be one override per service
+		'ss_servrdflgserv_service_id_un' => ['type' => 'unique', 'columns' => ['ss_servrdflgserv_tenant_id', 'ss_servrdflgserv_service_id']],
 		'ss_servrdflgserv_service_id_fk' => [
 			'type' => 'fk',
 			'columns' => ['ss_servrdflgserv_tenant_id', 'ss_servrdflgserv_service_id'],

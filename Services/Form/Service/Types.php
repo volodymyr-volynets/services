@@ -28,8 +28,8 @@ class Types extends \Object\Form\Wrapper\Base {
 			'ss_servtype_name' => [
 				'ss_servtype_name' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 100, 'required' => true],
 			],
-			'ss_servtype_group_code' => [
-				'ss_servtype_group_code' => ['order' => 1, 'row_order' => 250, 'label_name' => 'Service Type Group', 'domain' => 'group_code', 'null' => true, 'required' => true, 'placeholder' => 'Group', 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Type\Groups::optionsActive'],
+			'ss_servtype_servtpgrp_code' => [
+				'ss_servtype_servtpgrp_code' => ['order' => 1, 'row_order' => 250, 'label_name' => 'Service Type Group', 'domain' => 'group_code', 'null' => true, 'required' => true, 'placeholder' => 'Group', 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Type\Groups::optionsActive'],
 			],
 			'ss_servtype_icon' => [
 				'ss_servtype_icon' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Icon', 'domain' => 'icon', 'null' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Frontend\HTML\FontAwesome\Model\Icons::options', 'searchable' => true],

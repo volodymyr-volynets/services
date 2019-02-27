@@ -54,8 +54,8 @@ class Statuses extends \Object\Form\Wrapper\List2 {
 			],
 			'row2' => [
 				'blank' => ['order' => 1, 'row_order' => 200, 'label_name' => '', 'percent' => 25],
-				'ss_servstatus_type_code' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Service Type', 'domain' => 'group_code', 'percent' => 20, 'options_model' => '\Numbers\Services\Services\Model\Service\Types'],
-				'ss_servstatus_group_code' => ['order' => 2, 'label_name' => 'Status Group', 'domain' => 'group_code', 'percent' => 20, 'options_model' => '\Numbers\Services\Services\Model\Service\Status\Groups'],
+				'ss_servstatus_servtype_code' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Service Type', 'domain' => 'group_code', 'percent' => 20, 'options_model' => '\Numbers\Services\Services\Model\Service\Types'],
+				'ss_servstatus_servstsgrp_code' => ['order' => 2, 'label_name' => 'Status Group', 'domain' => 'group_code', 'percent' => 20, 'options_model' => '\Numbers\Services\Services\Model\Service\Status\Groups'],
 				'ss_servstatus_red_flag' => ['order' => 3, 'label_name' => 'Red Flag', 'type' => 'boolean', 'percent' => 10],
 				'ss_servstatus_parent_servstatus_code' => ['order' => 4, 'label_name' => 'Parent Status', 'domain' => 'group_code', 'percent' => 25, 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses'],
 			]

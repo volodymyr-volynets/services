@@ -15,7 +15,7 @@ class Types extends \Object\Table {
 	public $columns = [
 		'ss_servtype_tenant_id' => ['name' => 'Tenant #', 'domain' => 'tenant_id'],
 		'ss_servtype_code' => ['name' => 'Code', 'domain' => 'group_code'],
-		'ss_servtype_group_code' => ['name' => 'Service Type Group Code', 'domain' => 'group_code'],
+		'ss_servtype_servtpgrp_code' => ['name' => 'Service Type Group Code', 'domain' => 'group_code'],
 		'ss_servtype_name' => ['name' => 'Name', 'domain' => 'name'],
 		'ss_servtype_icon' => ['name' => 'Icon', 'domain' => 'icon', 'null' => true],
 		'ss_servtype_order' => ['name' => 'Order', 'domain' => 'order'],
@@ -23,9 +23,9 @@ class Types extends \Object\Table {
 	];
 	public $constraints = [
 		'ss_service_types_pk' => ['type' => 'pk', 'columns' => ['ss_servtype_tenant_id', 'ss_servtype_code']],
-		'ss_servtype_group_code_fk' => [
+		'ss_servtype_servtpgrp_code_fk' => [
 			'type' => 'fk',
-			'columns' => ['ss_servtype_tenant_id', 'ss_servtype_group_code'],
+			'columns' => ['ss_servtype_tenant_id', 'ss_servtype_servtpgrp_code'],
 			'foreign_model' => '\Numbers\Services\Services\Model\Service\Type\Groups',
 			'foreign_columns' => ['ss_servtpgrp_tenant_id', 'ss_servtpgrp_code']
 		]

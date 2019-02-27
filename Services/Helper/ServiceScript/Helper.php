@@ -286,7 +286,7 @@ class Helper {
 			\Layout::onLoad('Numbers.Widgets.ServiceScripts.init();');
 		}
 		// we must return id of service script
-		return $ids['service_script_id'];
+		return $service_script_id;
 	}
 
 	/**

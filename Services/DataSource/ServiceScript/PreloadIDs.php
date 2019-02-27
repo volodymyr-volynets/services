@@ -33,7 +33,7 @@ class PreloadIDs extends \Object\DataSource {
 			'queue_type_id' => 'a.ss_service_queue_type_id',
 			'queue_method_id' => 'd.on_quetype_method_id',
 			'assignment_type_id' => 'a.ss_service_assignment_type_id',
-			'type_code' => 'a.ss_service_type_code',
+			'type_code' => 'a.ss_service_servtype_code',
 		]);
 		// join
 		if (!empty($parameters['channel_code'])) {

@@ -115,8 +115,8 @@ class Services extends \Object\Form\Wrapper\Base {
 			'ss_service_category_id' => [
 				'ss_service_category_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Category', 'domain' => 'category_id', 'null' => true, 'required' => true, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Categories::optionsActive'],
 			],
-			'ss_service_type_code' => [
-				'ss_service_type_code' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Service Type', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 50, 'placeholder' => 'Type', 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Types::optionsActive', 'onchange' => 'this.form.submit();'],
+			'ss_service_servtype_code' => [
+				'ss_service_servtype_code' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Service Type', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 50, 'placeholder' => 'Type', 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Types::optionsActive', 'onchange' => 'this.form.submit();'],
 				'ss_service_assignment_type_id' => ['order' => 2, 'label_name' => 'Assignment Type', 'domain' => 'type_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Assignment\Types'],
 			],
 			'ss_service_queue_type_id' => [

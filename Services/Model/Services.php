@@ -17,7 +17,7 @@ class Services extends \Object\Table {
 		'ss_service_tenant_id' => ['name' => 'Tenant #', 'domain' => 'tenant_id'],
 		'ss_service_id' => ['name' => 'Service #', 'domain' => 'service_id_sequence'],
 		'ss_service_code' => ['name' => 'Code', 'domain' => 'group_code'],
-		'ss_service_type_code' => ['name' => 'Service Type Code', 'domain' => 'group_code'],
+		'ss_service_servtype_code' => ['name' => 'Service Type Code', 'domain' => 'group_code'],
 		'ss_service_name' => ['name' => 'Name', 'domain' => 'name'],
 		'ss_service_icon' => ['name' => 'Icon', 'domain' => 'icon', 'null' => true],
 		'ss_service_assignment_type_id' => ['name' => 'Assignment Type #', 'domain' => 'type_id', 'options_model' => '\Numbers\Services\Services\Model\Service\Assignment\Types'],
@@ -45,9 +45,9 @@ class Services extends \Object\Table {
 			'foreign_model' => '\Numbers\Users\Organizations\Model\Queue\Types',
 			'foreign_columns' => ['on_quetype_tenant_id', 'on_quetype_id']
 		],
-		'ss_service_type_code_fk' => [
+		'ss_service_servtype_code_fk' => [
 			'type' => 'fk',
-			'columns' => ['ss_service_tenant_id', 'ss_service_type_code'],
+			'columns' => ['ss_service_tenant_id', 'ss_service_servtype_code'],
 			'foreign_model' => '\Numbers\Services\Services\Model\Service\Types',
 			'foreign_columns' => ['ss_servtype_tenant_id', 'ss_servtype_code']
 		]

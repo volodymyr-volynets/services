@@ -15,8 +15,8 @@ class Statuses extends \Object\Table {
 	public $columns = [
 		'ss_servstatus_tenant_id' => ['name' => 'Tenant #', 'domain' => 'tenant_id'],
 		'ss_servstatus_code' => ['name' => 'Code', 'domain' => 'group_code'],
-		'ss_servstatus_type_code' => ['name' => 'Service Type Code', 'domain' => 'group_code'],
-		'ss_servstatus_group_code' => ['name' => 'Status Group Code', 'domain' => 'group_code'],
+		'ss_servstatus_servtype_code' => ['name' => 'Service Type Code', 'domain' => 'group_code'],
+		'ss_servstatus_servstsgrp_code' => ['name' => 'Status Group Code', 'domain' => 'group_code'],
 		'ss_servstatus_name' => ['name' => 'Name', 'domain' => 'name'],
 		'ss_servstatus_icon' => ['name' => 'Icon', 'domain' => 'icon', 'null' => true],
 		'ss_servstatus_order' => ['name' => 'Order', 'domain' => 'order'],
@@ -27,9 +27,10 @@ class Statuses extends \Object\Table {
 	];
 	public $constraints = [
 		'ss_service_statuses_pk' => ['type' => 'pk', 'columns' => ['ss_servstatus_tenant_id', 'ss_servstatus_code']],
-		'ss_servstatus_type_code_fk' => [
+		'ss_servstatus_servtype_code_un' => ['type' => 'unique', 'columns' => ['ss_servstatus_tenant_id', 'ss_servstatus_servtype_code', 'ss_servstatus_code']],
+		'ss_servstatus_servtype_code_fk' => [
 			'type' => 'fk',
-			'columns' => ['ss_servstatus_tenant_id', 'ss_servstatus_type_code'],
+			'columns' => ['ss_servstatus_tenant_id', 'ss_servstatus_servtype_code'],
 			'foreign_model' => '\Numbers\Services\Services\Model\Service\Types',
 			'foreign_columns' => ['ss_servtype_tenant_id', 'ss_servtype_code']
 		],
@@ -39,9 +40,9 @@ class Statuses extends \Object\Table {
 			'foreign_model' => '\Numbers\Services\Services\Model\Service\Statuses',
 			'foreign_columns' => ['ss_servstatus_tenant_id', 'ss_servstatus_code']
 		],
-		'ss_servstatus_group_code_fk' => [
+		'ss_servstatus_servstsgrp_code_fk' => [
 			'type' => 'fk',
-			'columns' => ['ss_servstatus_tenant_id', 'ss_servstatus_group_code'],
+			'columns' => ['ss_servstatus_tenant_id', 'ss_servstatus_servstsgrp_code'],
 			'foreign_model' => '\Numbers\Services\Services\Model\Service\Status\Groups',
 			'foreign_columns' => ['ss_servstsgrp_tenant_id', 'ss_servstsgrp_code']
 		]

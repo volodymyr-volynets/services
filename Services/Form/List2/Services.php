@@ -60,7 +60,7 @@ class Services extends \Object\Form\Wrapper\List2 {
 			],
 			'row2' => [
 				'blank' => ['order' => 1, 'row_order' => 200, 'label_name' => '', 'percent' => 15],
-				'ss_service_type_code' => ['order' => 2, 'row_order' => 200, 'label_name' => 'Service Type', 'domain' => 'group_code', 'percent' => 35, 'options_model' => '\Numbers\Services\Services\Model\Service\Types'],
+				'ss_service_servtype_code' => ['order' => 2, 'row_order' => 200, 'label_name' => 'Service Type', 'domain' => 'group_code', 'percent' => 35, 'options_model' => '\Numbers\Services\Services\Model\Service\Types'],
 				'ss_service_assignment_type_id' => ['order' => 4, 'label_name' => 'Assignment Type #', 'domain' => 'type_id', 'percent' => 35, 'options_model' => '\Numbers\Services\Services\Model\Service\Assignment\Types'],
 				'ss_service_billable' => ['order' => 5, 'label_name' => 'Red Flag', 'type' => 'boolean', 'percent' => 15],
 			],

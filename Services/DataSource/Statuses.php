@@ -44,13 +44,13 @@ class Statuses extends \Object\DataSource {
 		]);
 		// joins
 		$this->query->join('INNER', new \Numbers\Services\Services\Model\Service\Types(), 'b', 'ON', [
-			['AND', ['a.ss_servstatus_type_code', '=', 'b.ss_servtype_code', true], false]
+			['AND', ['a.ss_servstatus_servtype_code', '=', 'b.ss_servtype_code', true], false]
 		]);
 		$this->query->join('INNER', new \Numbers\Services\Services\Model\Service\Status\Groups(), 'c', 'ON', [
-			['AND', ['a.ss_servstatus_group_code', '=', 'c.ss_servstsgrp_code', true], false]
+			['AND', ['a.ss_servstatus_servstsgrp_code', '=', 'c.ss_servstsgrp_code', true], false]
 		]);
 		$this->query->join('INNER', new \Numbers\Services\Services\Model\Service\Type\Groups(), 'd', 'ON', [
-			['AND', ['b.ss_servtype_group_code', '=', 'd.ss_servtpgrp_code', true], false]
+			['AND', ['b.ss_servtype_servtpgrp_code', '=', 'd.ss_servtpgrp_code', true], false]
 		]);
 		// order by
 		$this->query->orderby(['d.ss_servtpgrp_order' => SORT_ASC, 'b.ss_servtype_order' => SORT_ASC, 'c.ss_servstsgrp_order' => SORT_ASC, 'a.ss_servstatus_order' => SORT_ASC]);

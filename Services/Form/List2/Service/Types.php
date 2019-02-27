@@ -50,7 +50,7 @@ class Types extends \Object\Form\Wrapper\List2 {
 			'row1' => [
 				'ss_servtype_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Type Code', 'domain' => 'group_code', 'percent' => 25, 'url_edit' => true],
 				'ss_servtype_name' => ['order' => 2, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 50],
-				'ss_servtype_group_code' => ['order' => 3, 'label_name' => 'Service Type Group', 'domain' => 'group_code', 'percent' => 20, 'options_model' => '\Numbers\Services\Services\Model\Service\Type\Groups'],
+				'ss_servtype_servtpgrp_code' => ['order' => 3, 'label_name' => 'Service Type Group', 'domain' => 'group_code', 'percent' => 20, 'options_model' => '\Numbers\Services\Services\Model\Service\Type\Groups'],
 				'ss_servtype_inactive' => ['order' => 4, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			]
 		]

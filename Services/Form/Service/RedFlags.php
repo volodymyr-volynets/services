@@ -66,7 +66,7 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 				'ss_servredflag_red_flag_servstatus_code' => ['order' => 3, 'label_name' => 'Red Flag Status', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_params' => ['ss_servstatus_red_flag' => 1]],
 			],
 			'ss_servredflag_where' => [
-				'ss_servredflag_where' => ['order' => 1, 'row_order' => 500, 'label_name' => 'Where', 'type' => 'text', 'null' => true, 'percent' => 100, 'method' => 'textarea'],
+				'ss_servredflag_where' => ['order' => 1, 'row_order' => 500, 'label_name' => 'Where', 'type' => 'text', 'null' => true, 'percent' => 100, 'method' => 'textarea', 'readonly' => true],
 			]
 		],
 		'all_services_container' => [
@@ -100,6 +100,10 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 	public function validate(& $form) {
 		if (empty($form->values['\Numbers\Services\Services\Model\Service\RedFlag\Services']) && empty($form->values['ss_servredflag_all_services'])) {
 			$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\Service\RedFlag\Services[1][ss_servrdflgserv_service_id]");
+		}
+		// if we choose all services we need to unset services
+		if (!empty($form->values['ss_servredflag_all_services'])) {
+			$form->values['\Numbers\Services\Services\Model\Service\RedFlag\Services'] = [];
 		}
 	}
 }
