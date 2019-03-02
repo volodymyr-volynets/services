@@ -48,9 +48,9 @@ class NewServiceScript extends \Object\Form\Wrapper\Base {
 			];
 		}
 		// load script
-		$wg_ss_service_script_id = (int) $form->values['wg_ss_service_script_id'] ?? null;
-		$wg_ss_channel_id = (int) $form->values['wg_ss_channel_id'] ?? null;
-		$wg_ss_region_id = (int) $form->values['wg_ss_region_id'] ?? null;
+		$wg_ss_service_script_id = (int) ($form->values['wg_ss_service_script_id'] ?? null);
+		$wg_ss_channel_id = (int) ($form->values['wg_ss_channel_id'] ?? null);
+		$wg_ss_region_id = (int) ($form->values['wg_ss_region_id'] ?? null);
 		$wg_ss_language_code = $form->values['wg_ss_language_code'] ?? null;
 		if ($wg_ss_service_script_id && $wg_ss_channel_id && $wg_ss_region_id && $wg_ss_language_code) {
 			\Numbers\Services\Services\Helper\ServiceScript\Helper::renderQuestionRaw($form, $wg_ss_service_script_id, $wg_ss_channel_id, $wg_ss_region_id, $wg_ss_language_code);

@@ -133,4 +133,66 @@ class Statuses extends \Object\DataSource {
 		}
 		return $result;
 	}
+
+	/**
+	 * @see $this->options()
+	 */
+	public function optionsJsonSingle($options = []) {
+		$data = $this->get($options);
+		$result = [];
+		foreach ($data as $k => $v) {
+			foreach ($v as $k2 => $v2) {
+				foreach ($v2 as $k3 => $v3) {
+					foreach ($v3 as $k4 => $v4) {
+						// service type group
+						$service_type_group_code = 'STG-' . $k;
+						if (!isset($result[$service_type_group_code])) {
+							$result[$service_type_group_code] = [
+								'name' => $v4['service_type_group_name'],
+								'icon_class' => \HTML::icon(['type' => $v4['service_type_group_icon'], 'class_only' => true]),
+								'disabled' => true,
+								'parent' => null
+							];
+						}
+						// service type code
+						$service_type_code = 'STG-' . $k . '-ST' . $k2;
+						if (!isset($result[$service_type_code])) {
+							$result[$service_type_code] = [
+								'name' => $v4['service_type_name'],
+								'icon_class' => \HTML::icon(['type' => $v4['service_type_icon'], 'class_only' => true]),
+								'disabled' => true,
+								'parent' => $service_type_group_code
+							];
+						}
+						// status group code
+						$status_group_code = 'STG-' . $k . '-ST' . $k2 . '-SG' . $k3;
+						if (!isset($result[$status_group_code])) {
+							$result[$status_group_code] = [
+								'name' => $v4['status_group_name'],
+								'icon_class' => \HTML::icon(['type' => $v4['status_group_icon'], 'class_only' => true]),
+								'disabled' => true,
+								'parent' => $service_type_code
+							];
+						}
+						// status group code
+						$status_code = $k4;
+						if (!isset($result[$status_code])) {
+							$result[$status_code] = [
+								'name' => $v4['status_name'],
+								'__selected_name' => i18n(null, $v4['service_type_name']) . ': ' . i18n(null, $v4['status_name']),
+								'icon_class' => \HTML::icon(['type' => $v4['status_icon'], 'class_only' => true]),
+								'parent' => $status_group_code
+							];
+						}
+					}
+				}
+			}
+		}
+		if (!empty($result)) {
+			$converted = \Helper\Tree::convertByParent($result, 'parent');
+			$result = [];
+			\Helper\Tree::convertTreeToOptionsMulti($converted, 0, ['name_field' => 'name', 'i18n' => 'skip_sorting'], $result);
+		}
+		return $result;
+	}
 }

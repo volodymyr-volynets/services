@@ -115,7 +115,7 @@ class Services extends \Object\Table {
 	/**
 	 * @see $this->options()
 	 */
-	public function optionsJsonWithServiceCategories($options = []) {
+	public function optionsWithCategories($options = []) {
 		if (!empty($options['show_all'])) {
 			$data = $this->options($options);
 		} else {
@@ -124,14 +124,13 @@ class Services extends \Object\Table {
 		$categories = \Numbers\Services\Services\Model\Service\Categories::optionsStatic();
 		$result = [];
 		foreach ($data as $k => $v) {
-			$parent = \Object\Table\Options::optionJsonFormatKey(['parent_id' => (int) $v['category_id'], 'service_id' => null]);
+			$parent = 'SC-' . $v['category_id'];
 			if (!isset($result[$parent])) {
 				$result[$parent] = $categories[$v['category_id']];
-				$result[$parent]['disabled'] = !empty($options['enable_parent']) ? false : true;
+				$result[$parent]['disabled'] = true;
 			}
-			$key = \Object\Table\Options::optionJsonFormatKey(['parent_id' => (int) $v['category_id'], 'service_id' => (int) $k]);
-			$result[$key] = $v;
-			$result[$key]['parent'] = $parent;
+			$result[$k] = $v;
+			$result[$k]['parent'] = $parent;
 		}
 		if (!empty($result)) {
 			$converted = \Helper\Tree::convertByParent($result, 'parent');
