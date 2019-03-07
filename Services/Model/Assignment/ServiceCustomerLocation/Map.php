@@ -7,7 +7,7 @@ class Map extends \Object\Table {
 	public $module_code = 'SS';
 	public $title = 'S/S Service Assignment Location Map';
 	public $name = 'ss_service_assignment_location_map';
-	public $pk = ['ss_servcustlmap_tenant_id', 'ss_servcustlmap_user_id', 'ss_servcustlmap_organization_id', 'ss_servcustlmap_service_id', 'ss_servcustlmap_customer_organization_id', 'ss_servcustlmap_location_id'];
+	public $pk = ['ss_servcustlmap_tenant_id', 'ss_servcustlmap_user_id', 'ss_servcustlmap_organization_id', 'ss_servcustlmap_service_id', 'ss_servcustlmap_customer_id', 'ss_servcustlmap_location_id'];
 	public $tenant = true;
 	public $orderby = [
 		'ss_servcustlmap_timestamp' => SORT_ASC
@@ -20,17 +20,17 @@ class Map extends \Object\Table {
 		'ss_servcustlmap_user_id' => ['name' => 'User #', 'domain' => 'user_id'],
 		'ss_servcustlmap_organization_id' => ['name' => 'Primary Organization #', 'domain' => 'organization_id'],
 		'ss_servcustlmap_service_id' => ['name' => 'Service #', 'domain' => 'service_id'],
-		'ss_servcustlmap_customer_organization_id' => ['name' => 'Customer Organization #', 'domain' => 'organization_id'],
+		'ss_servcustlmap_customer_id' => ['name' => 'Customer #', 'domain' => 'customer_id'],
 		'ss_servcustlmap_location_id' => ['name' => 'Location #', 'domain' => 'location_id'],
 		'ss_servcustlmap_inactive' => ['name' => 'Inactive', 'type' => 'boolean']
 	];
 	public $constraints = [
-		'ss_service_assignment_location_map_pk' => ['type' => 'pk', 'columns' => ['ss_servcustlmap_tenant_id', 'ss_servcustlmap_user_id', 'ss_servcustlmap_organization_id', 'ss_servcustlmap_service_id', 'ss_servcustlmap_customer_organization_id', 'ss_servcustlmap_location_id']],
-		'ss_servcustlmap_customer_organization_id_fk' => [
+		'ss_service_assignment_location_map_pk' => ['type' => 'pk', 'columns' => ['ss_servcustlmap_tenant_id', 'ss_servcustlmap_user_id', 'ss_servcustlmap_organization_id', 'ss_servcustlmap_service_id', 'ss_servcustlmap_customer_id', 'ss_servcustlmap_location_id']],
+		'ss_servcustlmap_customer_id_fk' => [
 			'type' => 'fk',
-			'columns' => ['ss_servcustlmap_tenant_id', 'ss_servcustlmap_user_id', 'ss_servcustlmap_organization_id', 'ss_servcustlmap_service_id', 'ss_servcustlmap_customer_organization_id'],
+			'columns' => ['ss_servcustlmap_tenant_id', 'ss_servcustlmap_user_id', 'ss_servcustlmap_organization_id', 'ss_servcustlmap_service_id', 'ss_servcustlmap_customer_id'],
 			'foreign_model' => '\Numbers\Services\Services\Model\Assignment\ServiceCustomerLocation\Locations',
-			'foreign_columns' => ['ss_servcustloc_tenant_id', 'ss_servcustloc_user_id', 'ss_servcustloc_organization_id', 'ss_servcustloc_service_id', 'ss_servcustloc_customer_organization_id']
+			'foreign_columns' => ['ss_servcustloc_tenant_id', 'ss_servcustloc_user_id', 'ss_servcustloc_organization_id', 'ss_servcustloc_service_id', 'ss_servcustloc_customer_id']
 		],
 		'ss_servcustlmap_location_id_fk' => [
 			'type' => 'fk',

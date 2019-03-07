@@ -7,7 +7,7 @@ class Locations extends \Object\Table {
 	public $module_code = 'SS';
 	public $title = 'S/S Service Assignment Locations';
 	public $name = 'ss_service_assignment_locations';
-	public $pk = ['ss_servcustloc_tenant_id', 'ss_servcustloc_user_id', 'ss_servcustloc_organization_id', 'ss_servcustloc_service_id', 'ss_servcustloc_customer_organization_id'];
+	public $pk = ['ss_servcustloc_tenant_id', 'ss_servcustloc_user_id', 'ss_servcustloc_organization_id', 'ss_servcustloc_service_id', 'ss_servcustloc_customer_id'];
 	public $tenant = true;
 	public $orderby = [
 		'ss_servcustloc_timestamp' => SORT_ASC
@@ -20,12 +20,12 @@ class Locations extends \Object\Table {
 		'ss_servcustloc_user_id' => ['name' => 'User #', 'domain' => 'user_id'],
 		'ss_servcustloc_organization_id' => ['name' => 'Primary Organization #', 'domain' => 'organization_id'],
 		'ss_servcustloc_service_id' => ['name' => 'Service #', 'domain' => 'service_id'],
-		'ss_servcustloc_customer_organization_id' => ['name' => 'Customer Organization #', 'domain' => 'organization_id'],
+		'ss_servcustloc_customer_id' => ['name' => 'Customer #', 'domain' => 'customer_id'],
 		'ss_servcustloc_priority_percent' => ['name' => 'Priority Percent', 'domain' => 'amount', 'null' => true],
 		'ss_servcustloc_inactive' => ['name' => 'Inactive', 'type' => 'boolean']
 	];
 	public $constraints = [
-		'ss_service_assignment_locations_pk' => ['type' => 'pk', 'columns' => ['ss_servcustloc_tenant_id', 'ss_servcustloc_user_id', 'ss_servcustloc_organization_id', 'ss_servcustloc_service_id', 'ss_servcustloc_customer_organization_id']],
+		'ss_service_assignment_locations_pk' => ['type' => 'pk', 'columns' => ['ss_servcustloc_tenant_id', 'ss_servcustloc_user_id', 'ss_servcustloc_organization_id', 'ss_servcustloc_service_id', 'ss_servcustloc_customer_id']],
 		'ss_servcustloc_user_id_fk' => [
 			'type' => 'fk',
 			'columns' => ['ss_servcustloc_tenant_id', 'ss_servcustloc_user_id'],
@@ -38,11 +38,11 @@ class Locations extends \Object\Table {
 			'foreign_model' => '\Numbers\Users\Organizations\Model\Organizations',
 			'foreign_columns' => ['on_organization_tenant_id', 'on_organization_id']
 		],
-		'ss_servcustloc_customer_organization_id_fk' => [
+		'ss_servcustloc_customer_id_fk' => [
 			'type' => 'fk',
-			'columns' => ['ss_servcustloc_tenant_id', 'ss_servcustloc_customer_organization_id'],
-			'foreign_model' => '\Numbers\Users\Organizations\Model\Organizations',
-			'foreign_columns' => ['on_organization_tenant_id', 'on_organization_id']
+			'columns' => ['ss_servcustloc_tenant_id', 'ss_servcustloc_customer_id'],
+			'foreign_model' => '\Numbers\Users\Organizations\Model\Customers',
+			'foreign_columns' => ['on_customer_tenant_id', 'on_customer_id']
 		],
 		'ss_servcustloc_service_id_fk' => [
 			'type' => 'fk',

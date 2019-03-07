@@ -40,9 +40,6 @@ class Categories extends \Object\Form\Wrapper\List2 {
 				'ss_servcategory_id2' => ['order' => 2, 'label_name' => 'Category #', 'domain' => 'category_id', 'percent' => 25, 'null' => true, 'query_builder' => 'a.ss_servcategory_id;<='],
 				'ss_servcategory_inactive1' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 50, 'method' => 'multiselect', 'multiple_column' => 1, 'options_model' => '\Object\Data\Model\Inactive', 'query_builder' => 'a.ss_servcategory_inactive;=']
 			],
-			'ss_servcategory_organization_id' => [
-				'ss_servcategory_organization_id1' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Organization', 'domain' => 'organization_id', 'percent' => 100, 'null' => true, 'method' => 'multiselect', 'options_model' => '\Numbers\Users\Organizations\Model\Organizations', 'multiple_column' => 1, 'query_builder' => 'a.ss_servcategory_organization_id;='],
-			],
 			'full_text_search' => [
 				'full_text_search' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Text Search', 'full_text_search_columns' => ['a.ss_servcategory_code', 'a.ss_servcategory_name'], 'placeholder' => true, 'domain' => 'name', 'percent' => 100, 'null' => true],
 			]
