@@ -52,7 +52,7 @@ class ServiceScripts extends \Object\DataSource {
 			$query = \Numbers\Services\Services\Model\ServiceScript\Question\Answers::queryBuilderStatic(['alias' => 'inner_c', 'skip_acl' => true])->select();
 			$query->columns([
 				'inner_c.ss_servquesanswer_question_id',
-				'answers' => $query->db_object->sqlHelper('string_agg', ['expression' => "concat_ws(':::', inner_c.ss_servquesanswer_name, inner_c.ss_servquesanswer_price, inner_c.ss_servquesanswer_order)", 'delimiter' => ';;;'])
+				'answers' => $query->db_object->sqlHelper('string_agg', ['expression' => "concat_ws(':::', inner_c.ss_servquesanswer_name, COALESCE(inner_c.ss_servquesanswer_price, 0), inner_c.ss_servquesanswer_order)", 'delimiter' => ';;;'])
 			]);
 			$query->where('AND', ['inner_c.ss_servquesanswer_service_script_id', '=', $parameters['service_script_id']]);
 			$query->groupby(['inner_c.ss_servquesanswer_question_id']);

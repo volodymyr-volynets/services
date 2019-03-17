@@ -43,7 +43,7 @@ class Services extends \Object\DataSource {
 			'ss_service_icon' => 'a.ss_service_icon',
 			'ss_service_inactive' => 'a.ss_service_inactive'
 		]);
-		// selected roles
+		// selected organizations
 		if (!empty($parameters['selected_organizations'])) {
 			$this->query->where('AND', function (& $query) use ($parameters) {
 				// allow existing values
