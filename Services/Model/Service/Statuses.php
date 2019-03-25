@@ -77,4 +77,22 @@ class Statuses extends \Object\Table {
 		'protection' => 2,
 		'scope' => 'enterprise'
 	];
+
+	public static $cached_statuses;
+
+	/**
+	 * Get status name
+	 *
+	 * @param string $code
+	 * @return string
+	 */
+	public static function getStatusName(string $code) : string {
+		if (!isset(self::$cached_statuses)) {
+			self::$cached_statuses = self::optionsStatic(['i18n' => true]);
+		}
+		if (!empty($code)) {
+			return self::$cached_statuses[$code]['name'];
+		}
+		return '';
+	}
 }
