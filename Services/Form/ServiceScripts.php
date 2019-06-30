@@ -89,7 +89,8 @@ class ServiceScripts extends \Object\Form\Wrapper\Base {
 				'ss_servscript_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			],
 			'ss_servscript_name' => [
-				'ss_servscript_name' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 100, 'required' => true],
+				'ss_servscript_name' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 75, 'required' => true],
+				'ss_servscript_type_id' => ['order' => 2, 'label_name' => 'Type', 'domain' => 'type_id', 'default' => 10, 'required' => true, 'percent' => 25, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\ServiceScript\Types'],
 			],
 			self::HIDDEN => [
 				'ss_servscript_versioned' => ['label_name' => 'Versioned', 'type' => 'boolean', 'method' => 'hidden'],
@@ -117,7 +118,7 @@ class ServiceScripts extends \Object\Form\Wrapper\Base {
 				'ss_servquestion_all_channels' => ['order' => 5, 'label_name' => 'All Channels', 'type' => 'boolean', 'default' => 1, 'percent' => 15, 'onchange' => 'this.form.submit();'],
 			],
 			'row3' => [
-				'ss_servquestion_model_id' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Model', 'domain' => 'group_id', 'null' => true, 'required' => 'c', 'percent' => 100, 'placeholder' => 'Model', 'method' => 'select', 'options_model' => '\Numbers\Backend\Db\Common\Model\Models', 'onchange' => 'this.form.submit();']
+				'ss_servquestion_model_id' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Model', 'domain' => 'group_id', 'null' => true, 'required' => 'c', 'percent' => 100, 'placeholder' => 'Model', 'method' => 'select', 'searchable' => true, 'options_model' => '\Numbers\Backend\Db\Common\Model\Models', 'onchange' => 'this.form.submit();']
 			],
 			self::HIDDEN => [
 				'ss_servquestion_id' => ['label_name' => 'Question #', 'domain' => 'question_id', 'method' => 'hidden'],

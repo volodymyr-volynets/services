@@ -20,6 +20,7 @@ class ServiceScripts extends \Object\Table {
 		'ss_servscript_id' => ['name' => 'Service Script #', 'domain' => 'service_script_id_sequence'],
 		'ss_servscript_code' => ['name' => 'Code', 'domain' => 'group_code', 'null' => true],
 		'ss_servscript_name' => ['name' => 'Name', 'domain' => 'name'],
+		'ss_servscript_type_id' => ['name' => 'Type #', 'domain' => 'type_id', 'default' => 10, 'options_model' => '\Numbers\Services\Services\Model\ServiceScript\Types'],
 		// version
 		'ss_servscript_versioned' => ['name' => 'Versioned', 'type' => 'boolean'],
 		'ss_servscript_version_service_script_id' => ['name' => 'Version Service Script #', 'domain' => 'service_script_id', 'null' => true],

@@ -19,7 +19,6 @@ class RedFlags extends \Object\Table {
 		'ss_servredflag_name' => ['name' => 'Name', 'domain' => 'name'],
 		'ss_servredflag_business' => ['name' => 'Business Hours', 'type' => 'boolean'],
 		'ss_servredflag_interval' => ['name' => 'Interval', 'type' => 'interval'],
-		'ss_servredflag_servstatus_code' => ['name' => 'Status', 'domain' => 'group_code'],
 		'ss_servredflag_servdatetype_code' => ['name' => 'Date Type Code', 'domain' => 'group_code'],
 		'ss_servredflag_red_flag_servstatus_code' => ['name' => 'Red Flag Status', 'domain' => 'group_code'],
 		'ss_servredflag_where' => ['name' => 'Where', 'type' => 'text', 'null' => true],
@@ -32,12 +31,6 @@ class RedFlags extends \Object\Table {
 		'ss_servredflag_servstatus_code_fk' => [
 			'type' => 'fk',
 			'columns' => ['ss_servredflag_tenant_id', 'ss_servredflag_servstatus_code'],
-			'foreign_model' => '\Numbers\Services\Services\Model\Service\Statuses',
-			'foreign_columns' => ['ss_servstatus_tenant_id', 'ss_servstatus_code']
-		],
-		'ss_servredflag_red_flag_servstatus_code_fk' => [
-			'type' => 'fk',
-			'columns' => ['ss_servredflag_tenant_id', 'ss_servredflag_red_flag_servstatus_code'],
 			'foreign_model' => '\Numbers\Services\Services\Model\Service\Statuses',
 			'foreign_columns' => ['ss_servstatus_tenant_id', 'ss_servstatus_code']
 		],

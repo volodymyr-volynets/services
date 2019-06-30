@@ -1,10 +1,10 @@
 <?php
 
-namespace Numbers\Services\Widgets\ServiceScripts\Form;
-class EditServiceScript extends \Object\Form\Wrapper\Base {
-	public $form_link = 'wg_edit_service_script';
+namespace Numbers\Services\Widgets\Surveys\Form;
+class EditSurvey extends \Object\Form\Wrapper\Base {
+	public $form_link = 'wg_edit_survey';
 	public $module_code = 'SS';
-	public $title = 'S/S New Service Script Form';
+	public $title = 'S/S Edit Survey Form';
 	public $options = [
 		'on_success_refresh_parent' => true
 	];
@@ -15,8 +15,8 @@ class EditServiceScript extends \Object\Form\Wrapper\Base {
 	public $rows = [];
 	public $elements = [
 		'top' => [
-			'wg_ss_id' => [
-				'wg_ss_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Service Script #', 'domain' => 'big_id_sequence', 'null' => true, 'readonly' => true],
+			'wg_survey_id' => [
+				'wg_survey_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Survey #', 'domain' => 'big_id_sequence', 'null' => true, 'readonly' => true],
 			],
 			self::HIDDEN => [
 				'__first_time' => ['label_name' => 'First Time', 'type' => 'boolean', 'method' => 'hidden']
@@ -36,26 +36,26 @@ class EditServiceScript extends \Object\Form\Wrapper\Base {
 		if (!empty($form->__options['model_table'])) {
 			$model = new $form->__options['model_table']();
 			$form->collection = [
-				'name' => 'Service Scripts',
-				'model' => $model->service_scripts_model
+				'name' => 'Surveys',
+				'model' => $model->surveys_model
 			];
 		}
 		// load script
-		$wg_ss_id = (int) $form->values['wg_ss_id'] ?? null;
-		if ($wg_ss_id) {
-			$model = \Factory::model($model->service_scripts_model);
+		$wg_survey_id = (int) $form->values['wg_survey_id'] ?? null;
+		if ($wg_survey_id) {
+			$model = \Factory::model($model->surveys_model);
 			$temp = $model->get([
 				'where' => [
-					'wg_ss_id' => $wg_ss_id,
+					'wg_survey_id' => $wg_survey_id,
 				],
 				'pk' => null,
 				'single_row' => true
 			]);
 			// render
-			if (!empty($temp['wg_ss_service_script_id'])) {
-				$this->answers = json_decode($temp['wg_ss_answers'], true);
+			if (!empty($temp['wg_survey_service_script_id'])) {
+				$this->answers = json_decode($temp['wg_survey_answers'], true);
 				array_key_prefix_and_suffix($this->answers, 'ss_field_answer_', '', false);
-				\Numbers\Services\Services\Helper\ServiceScript\Helper::renderQuestionRaw($form, $temp['wg_ss_service_script_id'], $temp['wg_ss_channel_id'], $temp['wg_ss_region_id'], $temp['wg_ss_language_code']);
+				\Numbers\Services\Services\Helper\ServiceScript\Helper::renderQuestionRaw($form, $temp['wg_survey_service_script_id'], $temp['wg_survey_channel_id'], $temp['wg_survey_region_id'], $temp['wg_survey_language_code']);
 			}
 		}
 	}
@@ -69,15 +69,15 @@ class EditServiceScript extends \Object\Form\Wrapper\Base {
 
 	public function validate(& $form) {
 		$model = new $form->options['model_table']();
-		foreach ($model->service_scripts['map'] as $k => $v) {
+		foreach ($model->surveys['map'] as $k => $v) {
 			if (isset($form->options['input'][$k])) {
 				$form->values[$v] = (int) $form->options['input'][$k];
 			}
 		}
 		if (!$form->hasErrors()) {
 			$ss_answers = \Numbers\Services\Services\Helper\ServiceScript\Helper::extractServiceScriptAnswers($form);
-			$form->values['wg_ss_answers'] = json_encode($ss_answers['answers']);
-			$form->values['wg_ss_total_amount'] = $ss_answers['total'] ?? 0;
+			$form->values['wg_survey_answers'] = json_encode($ss_answers['answers']);
+			$form->values['wg_survey_total_amount'] = $ss_answers['total'] ?? 0;
 		}
 	}
 }

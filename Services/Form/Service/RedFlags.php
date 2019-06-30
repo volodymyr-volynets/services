@@ -28,10 +28,20 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 			'details_pk' => ['ss_servrdflgserv_service_id'],
 			'order' => 35000,
 		],
+		'statuses_container' => [
+			'type' => 'details',
+			'details_rendering_type' => 'table',
+			'details_new_rows' => 1,
+			'details_key' => '\Numbers\Services\Services\Model\Service\RedFlag\Statuses',
+			'details_pk' => ['ss_servrdflgstatus_servstatus_code'],
+			'order' => 35000,
+			'required' => true,
+		],
 	];
 	public $rows = [
 		'tabs' => [
 			'general' => ['order' => 100, 'label_name' => 'General'],
+			'statuses' => ['order' => 150, 'label_name' => 'Statuses'],
 			'services' => ['order' => 200, 'label_name' => 'Services'],
 		]
 	];
@@ -50,6 +60,9 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 			'general' => [
 				'general' => ['container' => 'general_container', 'order' => 100],
 			],
+			'statuses' => [
+				'statuses' => ['container' => 'statuses_container', 'order' => 100],
+			],
 			'services' => [
 				'all_services' => ['container' => 'all_services_container', 'order' => 100],
 				'services' => ['container' => 'services_container', 'order' => 200],
@@ -62,11 +75,10 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 				'ss_servredflag_business' => ['order' => 3, 'label_name' => 'Business Hours', 'type' => 'boolean', 'percent' => 25],
 			],
 			'ss_servredflag_servstatus_code' => [
-				'ss_servredflag_servstatus_code' => ['order' => 1, 'row_order' => 400, 'label_name' => 'Status', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_params' => ['ss_servstatus_red_flag' => 0]],
-				'ss_servredflag_red_flag_servstatus_code' => ['order' => 3, 'label_name' => 'Red Flag Status', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_params' => ['ss_servstatus_red_flag' => 1]],
+				'ss_servredflag_red_flag_servstatus_code' => ['order' => 1, 'row_order' => 400, 'label_name' => 'Red Flag Status', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_params' => ['ss_servstatus_red_flag' => 1]],
 			],
 			'ss_servredflag_where' => [
-				'ss_servredflag_where' => ['order' => 1, 'row_order' => 500, 'label_name' => 'Where', 'type' => 'text', 'null' => true, 'percent' => 100, 'method' => 'textarea', 'readonly' => true],
+				'ss_servredflag_where' => ['order' => 1, 'row_order' => 500, 'label_name' => 'Where', 'type' => 'text', 'null' => true, 'percent' => 100, 'method' => 'textarea', 'persistent' => true],
 			]
 		],
 		'all_services_container' => [
@@ -78,6 +90,11 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 			'row1' => [
 				'ss_servrdflgserv_service_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 95, 'details_unique_select' => true, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Services', 'onchange' => 'this.form.submit();'],
 				'ss_servrdflgserv_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+			]
+		],
+		'statuses_container' => [
+			'row1' => [
+				'ss_servrdflgstatus_servstatus_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Status', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 95, 'details_unique_select' => true, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_params' => ['ss_servstatus_red_flag' => 0], 'onchange' => 'this.form.submit();'],
 			]
 		],
 		'buttons' => [
@@ -93,6 +110,12 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 				'pk' => ['ss_servrdflgserv_tenant_id', 'ss_servrdflgserv_servredflag_id', 'ss_servrdflgserv_service_id'],
 				'type' => '1M',
 				'map' => ['ss_servredflag_tenant_id' => 'ss_servrdflgserv_tenant_id', 'ss_servredflag_id' => 'ss_servrdflgserv_servredflag_id']
+			],
+			'\Numbers\Services\Services\Model\Service\RedFlag\Statuses' => [
+				'name' => 'Statuses',
+				'pk' => ['ss_servrdflgstatus_tenant_id', 'ss_servrdflgstatus_servredflag_id', 'ss_servrdflgstatus_servstatus_code'],
+				'type' => '1M',
+				'map' => ['ss_servredflag_tenant_id' => 'ss_servrdflgstatus_tenant_id', 'ss_servredflag_id' => 'ss_servrdflgstatus_servredflag_id']
 			]
 		]
 	];

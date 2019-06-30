@@ -16,14 +16,14 @@ class NewServiceScript extends \Object\Form\Wrapper\Base {
 	public $elements = [
 		'top' => [
 			'wg_ss_service_script_id' => [
-				'wg_ss_service_script_id' => ['order' => 1, 'row_order' => 150, 'label_name' => 'Service Script', 'domain' => 'service_script_id', 'null' => true, 'required' => true, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\ServiceScripts::optionsActive', 'options_params' => ['ss_servscript_versioned' => 1], 'onchange' => 'this.form.submit();']
+				'wg_ss_service_script_id' => ['order' => 1, 'row_order' => 150, 'label_name' => 'Service Script', 'domain' => 'service_script_id', 'null' => true, 'required' => true, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\ServiceScripts::optionsActive', 'options_params' => ['ss_servscript_versioned' => 1, 'ss_servscript_type_id' => 10], 'onchange' => 'this.form.submit();']
 			],
 			'wg_ss_channel_id' => [
 				'wg_ss_channel_id' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Channel', 'domain' => 'channel_id', 'null' => true, 'required' => true, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Channels::optionsActive', 'onchange' => 'this.form.submit();'],
 				'wg_ss_region_id' => ['order' => 2, 'label_name' => 'Region', 'domain' => 'region_id', 'null' => true, 'required' => true, 'method' => 'select', 'options_model' => '\Numbers\Users\Organizations\Model\Regions::optionsActive', 'onchange' => 'this.form.submit();'],
 			],
 			'wg_ss_language_code' => [
-				'wg_ss_language_code' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Language', 'domain' => 'language_code', 'null' => true, 'required' => true, 'method' => 'select', 'options_model' => '\Numbers\Internalization\Internalization\Model\Language\Codes::optionsActive', 'onchange' => 'this.form.submit();'],
+				'wg_ss_language_code' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Language', 'domain' => 'language_code', 'null' => true, 'required' => true, 'method' => 'select', 'options_model' => '\Numbers\Internalization\Internalization\Model\Language\Codes::optionsActive', 'options_params' => ['in_language_code;<>' => 'sm0'], 'onchange' => 'this.form.submit();'],
 			],
 			self::HIDDEN => [
 				'wg_ss_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Service Script #', 'domain' => 'big_id_sequence', 'null' => true, 'method' => 'hidden'],
