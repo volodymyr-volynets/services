@@ -74,7 +74,7 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 				'ss_servredflag_interval' => ['order' => 2, 'label_name' => 'Interval', 'type' => 'interval', 'null' => true, 'required' => true, 'percent' => 25, 'placeholder' => 'Days Hours:Minutes'],
 				'ss_servredflag_business' => ['order' => 3, 'label_name' => 'Business Hours', 'type' => 'boolean', 'percent' => 25],
 			],
-			'ss_servredflag_servstatus_code' => [
+			'ss_servredflag_red_flag_servstatus_code' => [
 				'ss_servredflag_red_flag_servstatus_code' => ['order' => 1, 'row_order' => 400, 'label_name' => 'Red Flag Status', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_params' => ['ss_servstatus_red_flag' => 1]],
 			],
 			'ss_servredflag_where' => [

@@ -28,12 +28,6 @@ class RedFlags extends \Object\Table {
 	public $constraints = [
 		'ss_service_red_flags_pk' => ['type' => 'pk', 'columns' => ['ss_servredflag_tenant_id', 'ss_servredflag_id']],
 		'ss_servredflag_code_un' => ['type' => 'unique', 'columns' => ['ss_servredflag_tenant_id', 'ss_servredflag_code']],
-		'ss_servredflag_servstatus_code_fk' => [
-			'type' => 'fk',
-			'columns' => ['ss_servredflag_tenant_id', 'ss_servredflag_servstatus_code'],
-			'foreign_model' => '\Numbers\Services\Services\Model\Service\Statuses',
-			'foreign_columns' => ['ss_servstatus_tenant_id', 'ss_servstatus_code']
-		],
 		'ss_servredflag_servdatetype_code_fk' => [
 			'type' => 'fk',
 			'columns' => ['ss_servredflag_tenant_id', 'ss_servredflag_servdatetype_code'],

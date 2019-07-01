@@ -60,7 +60,7 @@ class RedFlags extends \Object\Form\Wrapper\List2 {
 			],
 			'row2' => [
 				'__blank' => ['order' => 1, 'row_order' => 200, 'label_name' => '', 'percent' => 15],
-				'ss_servredflag_servstatus_code' => ['order' => 2, 'label_name' => 'Status', 'domain' => 'group_code', 'percent' => 25, 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses'],
+				'ss_servrdflgstatus_servstatus_code' => ['order' => 2, 'label_name' => 'Status(es)', 'domain' => 'group_code', 'null' => true, 'percent' => 25, 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses', 'subquery' => ['model' => '\Numbers\Services\Services\Model\Service\RedFlag\Statuses', 'alias' => 'inner_b', 'groupby' => 'ss_servrdflgstatus_servredflag_id', 'on' => [['a.ss_servredflag_id', '=', 'inner_b.ss_servrdflgstatus_servredflag_id']]]],
 				'ss_servredflag_red_flag_servstatus_code' => ['order' => 3, 'label_name' => 'Red Flag Status', 'domain' => 'group_code', 'percent' => 25, 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses'],
 				'ss_servredflag_interval' => ['order' => 4, 'label_name' => 'Interval', 'type' => 'interval', 'percent' => 20],
 				'ss_servredflag_business' => ['order' => 5, 'label_name' => 'Business Hours', 'type' => 'boolean', 'percent' => 15],
