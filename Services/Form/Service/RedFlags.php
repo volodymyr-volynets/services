@@ -28,6 +28,14 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 			'details_pk' => ['ss_servrdflgserv_service_id'],
 			'order' => 35000,
 		],
+		'owners_container' => [
+			'type' => 'details',
+			'details_rendering_type' => 'table',
+			'details_new_rows' => 1,
+			'details_key' => '\Numbers\Services\Services\Model\Service\RedFlag\Owners',
+			'details_pk' => ['ss_servrdflgowner_ownertype_id'],
+			'order' => 35000,
+		],
 		'statuses_container' => [
 			'type' => 'details',
 			'details_rendering_type' => 'table',
@@ -43,6 +51,7 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 			'general' => ['order' => 100, 'label_name' => 'General'],
 			'statuses' => ['order' => 150, 'label_name' => 'Statuses'],
 			'services' => ['order' => 200, 'label_name' => 'Services'],
+			'owners' => ['order' => 300, 'label_name' => 'Owners'],
 		]
 	];
 	public $elements = [
@@ -67,6 +76,9 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 				'all_services' => ['container' => 'all_services_container', 'order' => 100],
 				'services' => ['container' => 'services_container', 'order' => 200],
 			],
+			'owners' => [
+				'owners' => ['container' => 'owners_container', 'order' => 100],
+			],
 		],
 		'general_container' => [
 			'ss_servredflag_servdatetype_code' => [
@@ -88,8 +100,14 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 		],
 		'services_container' => [
 			'row1' => [
-				'ss_servrdflgserv_service_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 95, 'details_unique_select' => true, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Services', 'onchange' => 'this.form.submit();'],
+				'ss_servrdflgserv_service_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 95, 'details_unique_select' => true, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Services::optionsActive', 'onchange' => 'this.form.submit();'],
 				'ss_servrdflgserv_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+			]
+		],
+		'owners_container' => [
+			'row1' => [
+				'ss_servrdflgowner_ownertype_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Owner Type', 'domain' => 'type_id', 'null' => true, 'required' => true, 'percent' => 95, 'details_unique_select' => true, 'method' => 'select', 'options_model' => '\Numbers\Users\Users\Model\User\Owner\Types::optionsActive', 'onchange' => 'this.form.submit();'],
+				'ss_servrdflgowner_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			]
 		],
 		'statuses_container' => [
@@ -116,7 +134,13 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 				'pk' => ['ss_servrdflgstatus_tenant_id', 'ss_servrdflgstatus_servredflag_id', 'ss_servrdflgstatus_servstatus_code'],
 				'type' => '1M',
 				'map' => ['ss_servredflag_tenant_id' => 'ss_servrdflgstatus_tenant_id', 'ss_servredflag_id' => 'ss_servrdflgstatus_servredflag_id']
-			]
+			],
+			'\Numbers\Services\Services\Model\Service\RedFlag\Owners' => [
+				'name' => 'Owners',
+				'pk' => ['ss_servrdflgowner_tenant_id', 'ss_servrdflgowner_servredflag_id', 'ss_servrdflgowner_ownertype_id'],
+				'type' => '1M',
+				'map' => ['ss_servredflag_tenant_id' => 'ss_servrdflgowner_tenant_id', 'ss_servredflag_id' => 'ss_servrdflgowner_servredflag_id']
+			],
 		]
 	];
 
