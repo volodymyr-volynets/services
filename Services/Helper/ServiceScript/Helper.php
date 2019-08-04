@@ -299,11 +299,13 @@ class Helper {
 		$total = array_key_extract_by_prefix($form->values, 'wg_ss_total_');
 		// we need to unset empty answers
 		$answers = array_key_extract_by_prefix($form->values, 'ss_field_answer_') ?? [];
+		/*
 		foreach ($answers as $k => $v) {
 			if ($v === '' || !isset($v)) {
 				unset($answers[$k]);
 			}
 		}
+		*/
 		return [
 			'success' => true,
 			'error' => [],
@@ -316,7 +318,7 @@ class Helper {
 	 * Render as text
 	 *
 	 */
-	public static function renderAsText(int $service_script_id, int $service_channel_id, int $location_region_id, string $language_code, array $answers, string $total = '') : string {
+	public static function renderAsText(int $service_script_id, int $service_channel_id, int $location_region_id, string $language_code, $answers, string $total = '') : string {
 		// load questions
 		$questions = \Numbers\Services\Services\DataSource\ServiceScripts::getStatic([
 			'where' => [

@@ -66,8 +66,12 @@ class NewServiceScript extends \Object\Form\Wrapper\Base {
 		}
 		if (!$form->hasErrors()) {
 			$ss_answers = \Numbers\Services\Services\Helper\ServiceScript\Helper::extractServiceScriptAnswers($form);
-			$form->values['wg_ss_answers'] = json_encode($ss_answers['answers']);
-			$form->values['wg_ss_total_amount'] = $ss_answers['total'] ?? 0;
+			if (empty($ss_answers['answers'])) {
+				$form->error(DANGER, \Numbers\Services\Widgets\ServiceScripts\Helper\Messages::NO_SERVICE_SCRIPT_QUESTIONS);
+			} else {
+				$form->values['wg_ss_answers'] = json_encode($ss_answers['answers']);
+				$form->values['wg_ss_total_amount'] = $ss_answers['total'] ?? 0;
+			}
 		}
 	}
 }
