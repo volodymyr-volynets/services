@@ -2,6 +2,8 @@
 
 namespace Numbers\Services\Services\Model\ServiceScript\Question;
 class Types extends \Object\Data {
+	public $module_code = 'SS';
+	public $title = 'S/S ServiceScript Question Types';
 	public $column_key = 'ss_servquestype_code';
 	public $column_prefix = 'ss_servquestype_';
 	public $columns = [

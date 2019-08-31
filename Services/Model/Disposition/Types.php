@@ -2,6 +2,8 @@
 
 namespace Numbers\Services\Services\Model\Disposition;
 class Types extends \Object\Data {
+	public $module_code = 'SS';
+	public $title = 'S/S ServiceScript Disposition Types';
 	public $column_key = 'ss_disptype_code';
 	public $column_prefix = 'ss_disptype_';
 	public $columns = [

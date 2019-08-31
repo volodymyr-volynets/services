@@ -2,6 +2,8 @@
 
 namespace Numbers\Services\Services\Model\Service\Assignment;
 class Types extends \Object\Data {
+	public $module_code = 'SS';
+	public $title = 'S/S Service Assignment Types';
 	public $column_key = 'ss_servassigntype_id';
 	public $column_prefix = 'ss_servassigntype_';
 	public $columns = [

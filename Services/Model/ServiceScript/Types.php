@@ -2,6 +2,8 @@
 
 namespace Numbers\Services\Services\Model\ServiceScript;
 class Types extends \Object\Data {
+	public $module_code = 'SS';
+	public $title = 'S/S ServiceScript Types';
 	public $column_key = 'ss_servscrptype_id';
 	public $column_prefix = 'ss_servscrptype_';
 	public $columns = [
