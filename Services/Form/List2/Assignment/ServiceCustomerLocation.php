@@ -39,8 +39,8 @@ class ServiceCustomerLocation extends \Object\Form\Wrapper\List2 {
 				'ss_servcustloc_user_id1' => ['order' => 1, 'row_order' => 100, 'label_name' => 'User', 'domain' => 'user_id', 'null' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Users\Users\Model\Users::optionsActive', 'query_builder' => 'a.ss_servcustloc_user_id;='],
 			],
 			'ss_servcustloc_organization_id' => [
-				'ss_servcustloc_organization_id1' => ['order' => 1, 'row_order' => 200] + \Numbers\Users\Organizations\Helper\Filter::F_ORGANIZATION_ID + ['onchange' => 'this.form.submit();', 'query_builder' => 'a.ss_servcustloc_organization_id;='],
-				'ss_servcustloc_customer_id1' => ['order' => 2] + \Numbers\Users\Organizations\Helper\Filter::F_CUSTOMER_ID + ['options_depends' => ['on_customer_organization_id' => 'ss_servcustloc_organization_id1'], 'onchange' => 'this.form.submit();', 'query_builder' => 'a.ss_servcustloc_customer_id;='],
+				'ss_servcustloc_organization_id1' => ['order' => 1, 'row_order' => 200] + \Numbers\Users\Organizations\Helper\Filter::F_ORGANIZATION_ID_SINGLE + ['onchange' => 'this.form.submit();', 'query_builder' => 'a.ss_servcustloc_organization_id;='],
+				'ss_servcustloc_customer_id1' => ['order' => 2] + \Numbers\Users\Organizations\Helper\Filter::F_CUSTOMER_ID_SINGLE + ['options_depends' => ['on_customer_organization_id' => 'ss_servcustloc_organization_id1'], 'onchange' => 'this.form.submit();', 'query_builder' => 'a.ss_servcustloc_customer_id;='],
 			],
 			'ss_servcustloc_service_id' => [
 				'ss_servcustloc_service_id1' => ['order' => 1, 'row_order' => 300, 'order_for_defaults' => -31050, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\DataSource\Services::optionsActive', 'options_depends' => ['selected_organizations' => 'ss_servcustloc_organization_id1', 'customer_id' => 'ss_servcustloc_customer_id1'], 'onchange' => 'this.form.submit();', 'query_builder' => 'a.ss_servcustloc_service_id;='],
@@ -64,7 +64,7 @@ class ServiceCustomerLocation extends \Object\Form\Wrapper\List2 {
 				'ss_servcustloc_customer_id' => ['order' => 2, 'label_name' => 'Customer', 'domain' => 'customer_id', 'percent' => 50, 'options_model' => '\Numbers\Users\Organizations\Model\Customers'],
 			],
 			'row3' => [
-				'ss_servcustlmap_location_id' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Location(s)', 'domain' => 'location_id', 'null' => true, 'percent' => 100, 'options_model' => '\Numbers\Users\Organizations\Model\Locations', 'subquery' => ['model' => '\Numbers\Services\Services\Model\Assignment\ServiceCustomerLocation\Map', 'alias' => 'inner_a', 'groupby' => ['ss_servcustlmap_user_id', 'ss_servcustlmap_organization_id', 'ss_servcustlmap_service_id', 'ss_servcustlmap_customer_id'], 'on' => [['ss_servcustloc_user_id', '=', 'ss_servcustlmap_user_id'], ['ss_servcustloc_organization_id', '=', 'ss_servcustlmap_organization_id'], ['ss_servcustloc_service_id', '=', 'ss_servcustlmap_service_id', 'ss_servcustloc_customer_id', '=', 'ss_servcustlmap_customer_id']]]],
+				'ss_servcustlmap_location_id' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Location(s)', 'domain' => 'location_id', 'null' => true, 'percent' => 100, 'options_model' => '\Numbers\Users\Organizations\Model\Locations', 'subquery' => ['model' => '\Numbers\Services\Services\Model\Assignment\ServiceCustomerLocation\Map', 'alias' => 'inner_a', 'groupby' => ['ss_servcustlmap_user_id', 'ss_servcustlmap_organization_id', 'ss_servcustlmap_service_id', 'ss_servcustlmap_customer_id'], 'on' => [['ss_servcustloc_user_id', '=', 'ss_servcustlmap_user_id'], ['ss_servcustloc_organization_id', '=', 'ss_servcustlmap_organization_id'], ['ss_servcustloc_service_id', '=', 'ss_servcustlmap_service_id'], ['ss_servcustloc_customer_id', '=', 'ss_servcustlmap_customer_id']]]],
 			]
 		]
 	];

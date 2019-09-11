@@ -20,9 +20,13 @@ class RedFlags extends \Object\Table {
 		'ss_servredflag_business' => ['name' => 'Business Hours', 'type' => 'boolean'],
 		'ss_servredflag_interval' => ['name' => 'Interval', 'type' => 'interval'],
 		'ss_servredflag_servdatetype_code' => ['name' => 'Date Type Code', 'domain' => 'group_code'],
-		'ss_servredflag_red_flag_servstatus_code' => ['name' => 'Red Flag Status', 'domain' => 'group_code'],
+		'ss_servredflag_red_flag_servstatus_code' => ['name' => 'Red Flag Status', 'domain' => 'group_code', 'null' => true],
 		'ss_servredflag_where' => ['name' => 'Where', 'type' => 'text', 'null' => true],
 		'ss_servredflag_all_services' => ['name' => 'All Services', 'type' => 'boolean'],
+		'ss_servredflag_type_id' => ['name' => 'Type #', 'domain' => 'type_id', 'default' => 10, 'options_model' => '\Numbers\Services\Services\Model\Service\RedFlag\Types'],
+		'ss_servredflag_before' => ['name' => 'Before', 'type' => 'boolean'],
+		'ss_servredflag_notification_module_id' => ['name' => 'Notification Module #', 'domain' => 'module_id', 'null' => true],
+		'ss_servredflag_notification_feature_code' => ['name' => 'Notification Feature Code', 'domain' => 'feature_code', 'null' => true],
 		'ss_servredflag_inactive' => ['name' => 'Inactive', 'type' => 'boolean']
 	];
 	public $constraints = [
