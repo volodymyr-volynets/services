@@ -11,6 +11,7 @@ class ServiceCustomerLocation extends \Object\Form\Wrapper\Base {
 			'refresh' => true,
 			'new' => true,
 			'back' => true,
+			'import' => true,
 		],
 	];
 	public $containers = [
@@ -37,7 +38,7 @@ class ServiceCustomerLocation extends \Object\Form\Wrapper\Base {
 				'ss_servcustloc_customer_id' => ['order' => 2, 'label_name' => 'Customer', 'domain' => 'customer_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Users\Organizations\Model\Customers::optionsActive', 'options_depends' => ['on_customer_organization_id' => 'ss_servcustloc_organization_id'], 'onchange' => 'this.form.submit();'],
 			],
 			'ss_servcustloc_service_id' => [
-				'ss_servcustloc_service_id' => ['order' => 1, 'row_order' => 300, 'order_for_defaults' => -31050, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '!!!!todo!!!!\Mirabelli\JobManagement\DataSource\Services::optionsActive', 'options_depends' => ['selected_organizations' => 'ss_servcustloc_organization_id', 'customer_id' => 'ss_servcustloc_customer_id'], 'onchange' => 'this.form.submit();'],
+				'ss_servcustloc_service_id' => ['order' => 1, 'row_order' => 300, 'order_for_defaults' => -31050, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Services::optionsActive', 'onchange' => 'this.form.submit();'],
 			],
 			'ss_servcustloc_priority_percent' => [
 				'ss_servcustloc_priority_percent' => ['order' => 1, 'row_order' => 400, 'label_name' => 'Priority Percent', 'domain' => 'amount', 'null' => true, 'format' => '\Format::number'],

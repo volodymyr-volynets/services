@@ -43,7 +43,6 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 			'details_key' => '\Numbers\Services\Services\Model\Service\RedFlag\Statuses',
 			'details_pk' => ['ss_servrdflgstatus_servstatus_code'],
 			'order' => 35000,
-			'required' => true,
 		],
 	];
 	public $rows = [
@@ -81,16 +80,26 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 			],
 		],
 		'general_container' => [
+			'ss_servredflag_type_id' => [
+				'ss_servredflag_type_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Type', 'domain' => 'type_id', 'null' => true, 'default' => 10, 'required' => true, 'method' => 'select', 'no_choose' => true, 'options_model' => '\Numbers\Services\Services\Model\Service\RedFlag\Types', 'onchange' => 'this.form.submit();'],
+			],
 			'ss_servredflag_servdatetype_code' => [
-				'ss_servredflag_servdatetype_code' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Date Type', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\DateTypes::optionsActive'],
-				'ss_servredflag_interval' => ['order' => 2, 'label_name' => 'Interval', 'type' => 'interval', 'null' => true, 'required' => true, 'percent' => 25, 'placeholder' => 'Days Hours:Minutes'],
+				'ss_servredflag_servdatetype_code' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Date Type', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 25, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\DateTypes::optionsActive'],
+				'ss_servredflag_interval' => ['order' => 2, 'label_name' => 'Interval', 'type' => 'interval', 'null' => true, 'required' => true, 'percent' => 25, 'placeholder' => 'Hours:Minutes:Seconds'],
 				'ss_servredflag_business' => ['order' => 3, 'label_name' => 'Business Hours', 'type' => 'boolean', 'percent' => 25],
+				'ss_servredflag_before' => ['order' => 4, 'label_name' => 'Before', 'type' => 'boolean', 'percent' => 25],
 			],
 			'ss_servredflag_red_flag_servstatus_code' => [
-				'ss_servredflag_red_flag_servstatus_code' => ['order' => 1, 'row_order' => 400, 'label_name' => 'Red Flag Status', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_params' => ['ss_servstatus_red_flag' => 1]],
+				'ss_servredflag_red_flag_servstatus_code' => ['order' => 1, 'row_order' => 400, 'label_name' => 'Red Flag Status', 'domain' => 'group_code', 'null' => true, 'required' => 'c', 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_params' => ['ss_servstatus_red_flag' => 1]],
 			],
 			'ss_servredflag_where' => [
-				'ss_servredflag_where' => ['order' => 1, 'row_order' => 500, 'label_name' => 'Where', 'type' => 'text', 'null' => true, 'percent' => 100, 'method' => 'textarea', 'persistent' => true],
+				'ss_servredflag_where' => ['order' => 1, 'row_order' => 500, 'label_name' => 'Where', 'type' => 'text', 'null' => true, 'percent' => 100, 'method' => 'textarea', 'persistent' => true, 'readonly' => true],
+			],
+			'ss_servredflag_notification_module_id' => [
+				'ss_servredflag_notification_module_id' => ['order' => 1, 'row_order' => 600, 'label_name' => 'Notification', 'domain' => 'module_id', 'required' => 'c', 'null' => true, 'percent' => 100, 'placeholder' => 'Notification', 'method' => 'select', 'options_model' => '\Numbers\Tenants\Tenants\DataSource\Module\Features::optionsJson', 'options_params' => ['sm_feature_type' => 20], 'tree' => true, 'searchable' => true, 'json_contains' => ['module_id' => 'ss_servredflag_notification_module_id', 'feature_code' => 'ss_servredflag_notification_feature_code']],
+			],
+			self::HIDDEN => [
+				'ss_servredflag_notification_feature_code' => ['order' => 4, 'label_name' => 'Feature', 'domain' => 'feature_code', 'required' => 'c', 'null' => true, 'method' => 'hidden']
 			]
 		],
 		'all_services_container' => [
@@ -144,6 +153,13 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 		]
 	];
 
+	public function overrides(& $form) {
+		$body = \Request::input('ss_servredflag_where', false);
+		if (!empty($body)) {
+			$form->values['ss_servredflag_where'] = $body;
+		}
+	}
+
 	public function validate(& $form) {
 		if (empty($form->values['\Numbers\Services\Services\Model\Service\RedFlag\Services']) && empty($form->values['ss_servredflag_all_services'])) {
 			$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Services\Services\Model\Service\RedFlag\Services[1][ss_servrdflgserv_service_id]");
@@ -152,5 +168,57 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 		if (!empty($form->values['ss_servredflag_all_services'])) {
 			$form->values['\Numbers\Services\Services\Model\Service\RedFlag\Services'] = [];
 		}
+		if ($form->values['ss_servredflag_type_id'] == 10 && empty($form->values['ss_servredflag_red_flag_servstatus_code'])) {
+			$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, 'ss_servredflag_red_flag_servstatus_code');
+		}
+		if ($form->values['ss_servredflag_type_id'] == 10 && empty($form->values['\Numbers\Services\Services\Model\Service\RedFlag\Statuses'])) {
+			$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, '\Numbers\Services\Services\Model\Service\RedFlag\Statuses[1][ss_servrdflgstatus_servstatus_code]');
+		}
+		if ($form->values['ss_servredflag_type_id'] == 20 && empty($form->values['ss_servredflag_notification_module_id'])) {
+			$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, 'ss_servredflag_notification_module_id');
+		}
+		if (!empty($form->values['ss_servredflag_interval'])) {
+			$interval = explode(':', $form->values['ss_servredflag_interval']);
+			$seconds = 0;
+			if (count($interval) != 3) {
+				$form->error(DANGER, \Object\Content\Messages::INVALID_VALUES, 'ss_servredflag_interval');
+				return;
+			} else {
+				$seconds = intval($interval[0]) * 60 * 60;
+				$seconds+= intval($interval[1]) * 60;
+				$seconds+= intval($interval[2]);
+			}
+			if (!empty($form->values['ss_servredflag_business'])) {
+				if ($seconds < 60) {
+					$form->error(DANGER, 'Minimum 1 minute for business hours.', 'ss_servredflag_interval');
+				}
+			}
+		}
+	}
+
+	public function overrideFieldValue(& $form, & $options, & $value, & $neighbouring_values) {
+		if ($form->values['ss_servredflag_type_id'] == 10) {
+			if ($options['options']['field_name'] == 'ss_servredflag_before') {
+				$options['options']['readonly'] = true;
+			}
+			if ($options['options']['field_name'] == 'ss_servredflag_notification_module_id') {
+				$options['options']['row_class'] = 'grid_row_hidden';
+			}
+		} else {
+			if ($options['options']['field_name'] == 'ss_servredflag_red_flag_servstatus_code') {
+				$options['options']['row_class'] = 'grid_row_hidden';
+			}
+			if ($options['options']['field_name'] == 'ss_servrdflgstatus_servstatus_code') {
+				unset($options['options']['options_params']['ss_servstatus_red_flag']);
+			}
+		}
+	}
+
+	public function overrideTabs(& $form, & $options, & $tab, & $neighbouring_values) {
+		$result = [];
+		if ($tab == 'owners' && $form->values['ss_servredflag_type_id'] == 20) {
+			$result['hidden'] = true;
+		}
+		return $result;
 	}
 }
