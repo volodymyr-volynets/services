@@ -2,6 +2,8 @@
 
 namespace Numbers\Services\Services\Model\Service\RedFlag;
 class Types extends \Object\Data {
+	public $module_code = 'SS';
+	public $title = 'S/S Service Red Flag Types';
 	public $column_key = 'ss_servrdflgtype_id';
 	public $column_prefix = 'ss_servrdflgtype_';
 	public $columns = [
