@@ -37,9 +37,10 @@ class Statuses extends \Object\Form\Wrapper\Base {
 				'ss_servstatus_servstsgrp_code' => ['order' => 2, 'label_name' => 'Status Group', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Status\Groups::optionsActive'],
 			],
 			'ss_servstatus_red_flag' => [
-				'ss_servstatus_red_flag' => ['order' => 1, 'row_order' => 500, 'label_name' => 'Red Flag', 'type' => 'boolean', 'percent' => 25],
-				'ss_servstatus_is_action' => ['order' => 2, 'label_name' => 'Is Action', 'type' => 'boolean', 'percent' => 25],
-				'ss_servstatus_parent_servstatus_code' => ['order' => 3, 'label_name' => 'Parent Status', 'domain' => 'group_code', 'null' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_depends' => ['ss_servstatus_servtype_code' => 'ss_servstatus_servtype_code', 'ss_servstatus_code;<>' => 'ss_servstatus_code']],
+				'ss_servstatus_red_flag' => ['order' => 1, 'row_order' => 500, 'label_name' => 'Red Flag', 'type' => 'boolean', 'percent' => 15],
+				'ss_servstatus_is_action' => ['order' => 2, 'label_name' => 'Is Action', 'type' => 'boolean', 'percent' => 15],
+				'ss_servstatus_weight' => ['order' => 3, 'label_name' => 'Weight', 'domain' => 'weight', 'null' => true, 'percent' => 20],
+				'ss_servstatus_parent_servstatus_code' => ['order' => 4, 'label_name' => 'Parent Status', 'domain' => 'group_code', 'null' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_depends' => ['ss_servstatus_servtype_code' => 'ss_servstatus_servtype_code', 'ss_servstatus_code;<>' => 'ss_servstatus_code']],
 			]
 		],
 		'buttons' => [
