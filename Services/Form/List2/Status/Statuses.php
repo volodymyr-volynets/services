@@ -35,6 +35,9 @@ class Statuses extends \Object\Form\Wrapper\List2 {
 			]
 		],
 		'filter' => [
+			'ss_servstatus_servtype_code' => [
+				'ss_servstatus_servtype_code1' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Service Type', 'domain' => 'group_code', 'percent' => 100, 'method' => 'multiselect', 'multiple_column' => 1, 'options_model' => '\Numbers\Services\Services\Model\Service\Types', 'query_builder' => 'a.ss_servstatus_servtype_code;=']
+			],
 			'full_text_search' => [
 				'full_text_search' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Text Search', 'full_text_search_columns' => ['a.ss_servstatus_code', 'a.ss_servstatus_name'], 'placeholder' => true, 'domain' => 'name', 'percent' => 100, 'null' => true],
 			]
