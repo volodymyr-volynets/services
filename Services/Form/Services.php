@@ -39,6 +39,14 @@ class Services extends \Object\Form\Wrapper\Base {
 			'order' => 35001,
 			'acl_subresource_edit' => ['SS::SERVICE_ALT_NAMES']
 		],
+		'sub_services_container' => [
+			'type' => 'details',
+			'details_rendering_type' => 'table',
+			'details_new_rows' => 2,
+			'details_key' => '\Numbers\Services\Services\Model\Service\SubServices',
+			'details_pk' => ['ss_servsubserv_name'],
+			'order' => 35001,
+		],
 		'channels_container' => [
 			'type' => 'details',
 			'details_rendering_type' => 'table',
@@ -74,6 +82,7 @@ class Services extends \Object\Form\Wrapper\Base {
 			'general' => ['order' => 100, 'label_name' => 'General'],
 			'organizations' => ['order' => 150, 'label_name' => 'Organizations', 'acl_subresource_hide' => ['SS::SERVICE_ORGANIZATIONS']],
 			'alt_names' => ['order' => 200, 'label_name' => 'Alt. Names', 'acl_subresource_hide' => ['SS::SERVICE_ALT_NAMES']],
+			'sub_services' => ['order' => 250, 'label_name' => 'Sub Services'],
 			'channels' => ['order' => 300, 'label_name' => 'Channels', 'acl_subresource_hide' => ['SS::SERVICE_CHANNELS']],
 			'pricing' => ['order' => 400, 'label_name' => 'Pricing', 'acl_subresource_hide' => ['SS::SERVICE_PRICING']],
 			'invoicing' => ['order' => 500, 'label_name' => 'Invoicing', 'acl_subresource_hide' => ['SS::SERVICE_PRICING']],
@@ -100,6 +109,9 @@ class Services extends \Object\Form\Wrapper\Base {
 			],
 			'alt_names' => [
 				'alt_names' => ['container' => 'alt_names_container', 'order' => 100],
+			],
+			'sub_services' => [
+				'sub_services' => ['container' => 'sub_services_container', 'order' => 100],
 			],
 			'channels' => [
 				'channels' => ['container' => 'channels_container', 'order' => 100],
@@ -148,6 +160,13 @@ class Services extends \Object\Form\Wrapper\Base {
 				'ss_servaltname_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5],
 			]
 		],
+		'sub_services_container' => [
+			'row1' => [
+				'ss_servsubserv_name' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Name', 'domain' => 'name', 'null' => true, 'required' => true, 'percent' => 80, 'onblur' => 'this.form.submit();'],
+				'ss_servsubserv_default' => ['order' => 2, 'label_name' => 'Default', 'type' => 'boolean', 'percent' => 15],
+				'ss_servsubserv_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5],
+			]
+		],
 		'channels_container' => [
 			'row1' => [
 				'ss_servchanmap_channel_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Channel', 'domain' => 'channel_id', 'null' => true, 'required' => true, 'percent' => 95, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Channels::optionsActive', 'onchange' => 'this.form.submit();'],
@@ -192,6 +211,12 @@ class Services extends \Object\Form\Wrapper\Base {
 				'type' => '1M',
 				'map' => ['ss_service_tenant_id' => 'ss_servaltname_tenant_id', 'ss_service_id' => 'ss_servaltname_service_id']
 			],
+			'\Numbers\Services\Services\Model\Service\SubServices' => [
+				'name' => 'Sub Services',
+				'pk' => ['ss_servsubserv_tenant_id', 'ss_servsubserv_service_id', 'ss_servsubserv_name'],
+				'type' => '1M',
+				'map' => ['ss_service_tenant_id' => 'ss_servsubserv_tenant_id', 'ss_service_id' => 'ss_servsubserv_service_id']
+			],
 			'\Numbers\Services\Services\Model\Service\Channel\Map' => [
 				'name' => 'Channels',
 				'pk' => ['ss_servchanmap_tenant_id', 'ss_servchanmap_service_id', 'ss_servchanmap_channel_id'],
@@ -221,5 +246,15 @@ class Services extends \Object\Form\Wrapper\Base {
 				$options['options']['format'] = 'number';
 			}
 		}
+	}
+
+	public function validate(& $form) {
+		// primary organizations
+		$default_service_name = $form->validateDetailsPrimaryColumn(
+			'\Numbers\Services\Services\Model\Service\SubServices',
+			'ss_servsubserv_default',
+			'ss_servsubserv_inactive',
+			'ss_servsubserv_name'
+		);
 	}
 }
