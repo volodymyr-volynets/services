@@ -317,8 +317,17 @@ class Helper {
 	/**
 	 * Render as text
 	 *
+	 * @param int $service_script_id
+	 * @param int $service_channel_id
+	 * @param int $location_region_id
+	 * @param string $language_code
+	 * @param type $answers
+	 * @param string $total
+	 * @param array $options
+	 *	boolean condensed
+	 * @return string
 	 */
-	public static function renderAsText(int $service_script_id, int $service_channel_id, int $location_region_id, string $language_code, $answers, string $total = '') : string {
+	public static function renderAsText(int $service_script_id, int $service_channel_id, int $location_region_id, string $language_code, $answers, string $total = '', array $options = []) : string {
 		// load questions
 		$questions = \Numbers\Services\Services\DataSource\ServiceScripts::getStatic([
 			'where' => [
@@ -351,7 +360,9 @@ class Helper {
 					$result.= i18n(null, 'A:') . ' ' . $answers[$k] . "\n";
 				}
 			}
-			$result.= "\n";
+			if (empty($options['condensed'])) {
+				$result.= "\n";
+			}
 		}
 		// total
 		if (\Math::compare($total, 0) != 0) {

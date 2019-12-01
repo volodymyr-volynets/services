@@ -31,11 +31,11 @@ class ServiceCustomerLocation extends \Object\Form\Wrapper\Base {
 	public $elements = [
 		'top' => [
 			'ss_servcustloc_user_id' => [
-				'ss_servcustloc_user_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'User', 'domain' => 'user_id', 'null' => true, 'required' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Users\Users\Model\Users::optionsActive', 'onchange' => 'this.form.submit();'],
+				'ss_servcustloc_user_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'User', 'domain' => 'user_id', 'null' => true, 'required' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Users\Users\Model\Aliases\Users::optionsActive', 'onchange' => 'this.form.submit();'],
 			],
 			'ss_servcustloc_organization_id' => [
-				'ss_servcustloc_organization_id' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Organization', 'domain' => 'organization_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'tree' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Organizations::optionsGroupedActive', 'onchange' => 'this.form.submit();'],
-				'ss_servcustloc_customer_id' => ['order' => 2, 'label_name' => 'Customer', 'domain' => 'customer_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Users\Organizations\Model\Customers::optionsActive', 'options_depends' => ['on_customer_organization_id' => 'ss_servcustloc_organization_id'], 'onchange' => 'this.form.submit();'],
+				'ss_servcustloc_organization_id' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Organization', 'domain' => 'organization_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'searchable' => true, 'tree' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Organizations::optionsGroupedActive', 'onchange' => 'this.form.submit();'],
+				'ss_servcustloc_customer_id' => ['order' => 2, 'label_name' => 'Customer', 'domain' => 'customer_id', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'searchable' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Customers::optionsActive', 'options_depends' => ['on_customer_organization_id' => 'ss_servcustloc_organization_id'], 'onchange' => 'this.form.submit();'],
 			],
 			'ss_servcustloc_service_id' => [
 				'ss_servcustloc_service_id' => ['order' => 1, 'row_order' => 300, 'order_for_defaults' => -31050, 'label_name' => 'Service', 'domain' => 'service_id', 'null' => true, 'required' => true, 'percent' => 100, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Services::optionsActive', 'onchange' => 'this.form.submit();'],
@@ -47,7 +47,7 @@ class ServiceCustomerLocation extends \Object\Form\Wrapper\Base {
 		],
 		'locations_container' => [
 			'row1' => [
-				'ss_servcustlmap_location_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Location', 'domain' => 'location_id', 'null' => true, 'required' => true, 'percent' => 95, 'method' => 'select', 'options_model' => '\Numbers\Users\Organizations\Model\Locations::optionsActive', 'options_depends' => ['on_location_organization_id' => 'parent::ss_servcustloc_organization_id', 'on_location_customer_id' => 'parent::ss_servcustloc_customer_id'], 'onchange' => 'this.form.submit();'],
+				'ss_servcustlmap_location_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Location', 'domain' => 'location_id', 'null' => true, 'required' => true, 'percent' => 95, 'method' => 'select', 'details_unique_select' => true, 'options_model' => '\Numbers\Users\Organizations\Model\Locations::optionsActive', 'options_depends' => ['on_location_organization_id' => 'parent::ss_servcustloc_organization_id', 'on_location_customer_id' => 'parent::ss_servcustloc_customer_id'], 'onchange' => 'this.form.submit();'],
 				'ss_servcustlmap_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			]
 		],
