@@ -121,7 +121,7 @@ class RedFlags extends \Object\Form\Wrapper\Base {
 		],
 		'statuses_container' => [
 			'row1' => [
-				'ss_servrdflgstatus_servstatus_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Status', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 95, 'details_unique_select' => true, 'method' => 'select', 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_params' => ['ss_servstatus_red_flag' => 0], 'onchange' => 'this.form.submit();'],
+				'ss_servrdflgstatus_servstatus_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Status', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 95, 'details_unique_select' => true, 'method' => 'select', 'searchable' => true, 'details_unique_select' => true, 'options_model' => '\Numbers\Services\Services\Model\Service\Statuses::optionsActive', 'options_params' => ['ss_servstatus_red_flag' => 0], 'onchange' => 'this.form.submit();'],
 			]
 		],
 		'buttons' => [
