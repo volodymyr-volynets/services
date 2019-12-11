@@ -1,10 +1,10 @@
 <?php
 
 namespace Numbers\Services\Services\Form\List2;
-class Workflows extends \Object\Form\Wrapper\List2 {
-	public $form_link = 'ss_workflows_list';
+class PaymentTypes extends \Object\Form\Wrapper\List2 {
+	public $form_link = 'ss_payment_types_list';
 	public $module_code = 'SS';
-	public $title = 'S/S Workflows List';
+	public $title = 'S/S Payment Types List';
 	public $options = [
 		'segment' => self::SEGMENT_LIST,
 		'actions' => [
@@ -36,7 +36,7 @@ class Workflows extends \Object\Form\Wrapper\List2 {
 		],
 		'filter' => [
 			'full_text_search' => [
-				'full_text_search' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Text Search', 'full_text_search_columns' => ['a.ss_servworkflow_code', 'a.ss_servworkflow_name'], 'placeholder' => true, 'domain' => 'name', 'percent' => 100, 'null' => true],
+				'full_text_search' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Text Search', 'full_text_search_columns' => ['a.ss_serpaytype_code', 'a.ss_serpaytype_name'], 'placeholder' => true, 'domain' => 'name', 'percent' => 100, 'null' => true],
 			]
 		],
 		'sort' => [
@@ -48,23 +48,23 @@ class Workflows extends \Object\Form\Wrapper\List2 {
 		self::LIST_BUTTONS => self::LIST_BUTTONS_DATA,
 		self::LIST_CONTAINER => [
 			'row1' => [
-				'ss_servworkflow_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Code', 'domain' => 'group_code', 'percent' => 25, 'url_edit' => true],
-				'ss_servworkflow_name' => ['order' => 2, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 70],
-				'ss_servworkflow_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+				'ss_serpaytype_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Code', 'domain' => 'type_code', 'percent' => 25, 'url_edit' => true],
+				'ss_serpaytype_name' => ['order' => 2, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 70],
+				'ss_serpaytype_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			],
 		]
 	];
-	public $query_primary_model = '\Numbers\Services\Services\Model\Workflows';
+	public $query_primary_model = '\Numbers\Services\Services\Model\Payment\Types';
 	public $list_options = [
 		'pagination_top' => '\Numbers\Frontend\HTML\Form\Renderers\HTML\Pagination\Base',
 		'pagination_bottom' => '\Numbers\Frontend\HTML\Form\Renderers\HTML\Pagination\Base',
 		'default_limit' => 30,
 		'default_sort' => [
-			'ss_servworkflow_name' => SORT_ASC
+			'ss_serpaytype_name' => SORT_ASC
 		]
 	];
 	const LIST_SORT_OPTIONS = [
-		'ss_servworkflow_code' => ['name' => 'Code'],
-		'ss_servworkflow_name' => ['name' => 'Name']
+		'ss_serpaytype_code' => ['name' => 'Code'],
+		'ss_serpaytype_name' => ['name' => 'Name']
 	];
 }
