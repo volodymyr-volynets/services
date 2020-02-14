@@ -48,7 +48,9 @@ class Statuses extends \Object\Table {
 			'foreign_columns' => ['ss_servstsgrp_tenant_id', 'ss_servstsgrp_code']
 		]
 	];
-	public $indexes = [];
+	public $indexes = [
+		'ss_service_statuses_fulltext_idx' => ['type' => 'fulltext', 'columns' => ['ss_servstatus_code', 'ss_servstatus_name']],
+	];
 	public $history = false;
 	public $audit = [
 		'map' => [

@@ -47,6 +47,22 @@ class Services extends \Object\Form\Wrapper\Base {
 			'details_pk' => ['ss_servsubserv_name'],
 			'order' => 35001,
 		],
+		'integration_mappings_container' => [
+			'type' => 'details',
+			'details_rendering_type' => 'table',
+			'details_new_rows' => 1,
+			'details_key' => '\Numbers\Services\Services\Model\Service\IntegrationMappings',
+			'details_pk' => ['ss_servintegmap_integtype_code', 'ss_servintegmap_code'],
+			'order' => 35001,
+		],
+		'owners_container' => [
+			'type' => 'details',
+			'details_rendering_type' => 'table',
+			'details_new_rows' => 1,
+			'details_key' => '\Numbers\Services\Services\Model\Service\Owners',
+			'details_pk' => ['ss_servowner_ownertype_id', 'ss_servowner_user_id'],
+			'order' => 35001,
+		],
 		'channels_container' => [
 			'type' => 'details',
 			'details_rendering_type' => 'table',
@@ -86,6 +102,8 @@ class Services extends \Object\Form\Wrapper\Base {
 			'channels' => ['order' => 300, 'label_name' => 'Channels', 'acl_subresource_hide' => ['SS::SERVICE_CHANNELS']],
 			'pricing' => ['order' => 400, 'label_name' => 'Pricing', 'acl_subresource_hide' => ['SS::SERVICE_PRICING']],
 			'invoicing' => ['order' => 500, 'label_name' => 'Invoicing', 'acl_subresource_hide' => ['SS::SERVICE_PRICING']],
+			'integration' => ['order' => 600, 'label_name' => 'Integration'],
+			'owners' => ['order' => 700, 'label_name' => 'Owners'],
 			\Numbers\Tenants\Widgets\Attributes\Base::ATTRIBUTES => \Numbers\Tenants\Widgets\Attributes\Base::ATTRIBUTES_DATA + ['acl_subresource_hide' => ['SS::SERVICE_ATTRIBUTES']],
 		],
 	];
@@ -121,6 +139,12 @@ class Services extends \Object\Form\Wrapper\Base {
 			],
 			'invoicing' => [
 				'invoicing' => ['container' => 'invoicing_container', 'order' => 100],
+			],
+			'integration' => [
+				'integration' => ['container' => 'integration_mappings_container', 'order' => 100],
+			],
+			'owners' => [
+				'owners' => ['container' => 'owners_container', 'order' => 100],
 			]
 		],
 		'general_container' => [
@@ -191,6 +215,24 @@ class Services extends \Object\Form\Wrapper\Base {
 				'ss_servprcmarkup_detail_id' => ['label_name' => 'Detail #', 'domain' => 'group_id', 'default' => 0, 'null' => true, 'method' => 'hidden'],
 			]
 		],
+		'integration_mappings_container' => [
+			'row1' => [
+				'ss_servintegmap_integtype_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Integration Type', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Tenants\Tenants\Model\Integration\Types::optionsActive', 'onchange' => 'this.form.submit();'],
+				'ss_servintegmap_code' => ['order' => 2, 'label_name' => 'Code', 'domain' => 'code', 'null' => true, 'required' => true, 'percent' => 45],
+				'ss_servintegmap_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+			],
+			'row2' => [
+				'ss_servintegmap_name' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Name', 'domain' => 'name', 'null' => true, 'percent' => 95],
+				'ss_servintegmap_default' => ['order' => 2, 'label_name' => 'Default', 'type' => 'boolean', 'percent' => 5],
+			]
+		],
+		'owners_container' => [
+			'row1' => [
+				'ss_servowner_ownertype_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Owner Type', 'domain' => 'type_id', 'null' => true, 'required' => true, 'percent' => 25, 'method' => 'select', 'options_model' => '\Numbers\Users\Users\Model\User\Owner\Types::optionsActive', 'onchange' => 'this.form.submit();'],
+				'ss_servowner_user_id' => ['order' => 2, 'label_name' => 'User', 'domain' => 'user_id', 'null' => true, 'required' => true, 'percent' => 70, 'method' => 'select', 'options_model' => '\Numbers\Users\Users\DataSource\Owners::optionsActive', 'options_depends' => ['owner_type_id' => 'detail::ss_servowner_ownertype_id']],
+				'ss_servowner_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+			]
+		],
 		'buttons' => [
 			self::BUTTONS => self::BUTTONS_DATA_GROUP
 		]
@@ -217,6 +259,12 @@ class Services extends \Object\Form\Wrapper\Base {
 				'type' => '1M',
 				'map' => ['ss_service_tenant_id' => 'ss_servsubserv_tenant_id', 'ss_service_id' => 'ss_servsubserv_service_id']
 			],
+			'\Numbers\Services\Services\Model\Service\IntegrationMappings' => [
+				'name' => 'Integration Mappings',
+				'pk' => ['ss_servintegmap_tenant_id', 'ss_servintegmap_service_id', 'ss_servintegmap_integtype_code', 'ss_servintegmap_code'],
+				'type' => '1M',
+				'map' => ['ss_service_tenant_id' => 'ss_servintegmap_tenant_id', 'ss_service_id' => 'ss_servintegmap_service_id']
+			],
 			'\Numbers\Services\Services\Model\Service\Channel\Map' => [
 				'name' => 'Channels',
 				'pk' => ['ss_servchanmap_tenant_id', 'ss_servchanmap_service_id', 'ss_servchanmap_channel_id'],
@@ -237,6 +285,12 @@ class Services extends \Object\Form\Wrapper\Base {
 					]
 				]
 			],
+			'\Numbers\Services\Services\Model\Service\Owners' => [
+				'name' => 'Owners',
+				'pk' => ['ss_servowner_tenant_id', 'ss_servowner_service_id', 'ss_servowner_ownertype_id', 'ss_servowner_user_id'],
+				'type' => '1M',
+				'map' => ['ss_service_tenant_id' => 'ss_servowner_tenant_id', 'ss_service_id' => 'ss_servowner_service_id']
+			]
 		]
 	];
 

@@ -22,7 +22,7 @@ class Statuses extends \Object\Form\Wrapper\Base {
 	public $elements = [
 		'top' => [
 			'ss_servstatus_code' => [
-				'ss_servstatus_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Group Code', 'domain' => 'group_code', 'required' => true, 'percent' => 95, 'navigation' => true],
+				'ss_servstatus_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Code', 'domain' => 'group_code', 'required' => true, 'percent' => 95, 'navigation' => true],
 				'ss_servstatus_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			],
 			'ss_servstatus_name' => [
