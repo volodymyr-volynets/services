@@ -71,10 +71,23 @@ class GrantServiceCustomerLocation extends \Object\Form\Wrapper\Base {
 			];
 		}
 		// go through all services
+		set_time_limit(0);
 		$model = new \Numbers\Services\Services\Model\Collection\ServiceCustomerLocation();
 		$model->primary_model->db_object->begin();
 		$counter = 0;
 		foreach ($form->values['service_ids'] as $k => $v) {
+			// service might not have organization assignment
+			$service_organizaiton_result = \Numbers\Services\Services\Model\Service\Organizations::collectionStatic()->merge([
+				'ss_servorg_tenant_id' => \Tenant::id(),
+				'ss_servorg_service_id' => $k,
+				'ss_servorg_organization_id' => $form->values['organization_id'],
+				'ss_servorg_inactive' => 0
+			]);
+			if (!$service_organizaiton_result['success']) {
+				$form->error(DANGER, $service_organizaiton_result['error']);
+				$model->primary_model->db_object->rollback();
+				return;
+			}
 			$collection_result = $model->merge([
 				'ss_servcustloc_user_id' => $form->values['user_id'],
 				'ss_servcustloc_organization_id' => $form->values['organization_id'],
