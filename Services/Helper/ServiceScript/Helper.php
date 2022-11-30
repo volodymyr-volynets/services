@@ -100,7 +100,7 @@ class Helper {
 				'percent' => 100,
 			];
 			// answers
-			$description = nl2br($v['description']);
+			$description = nl2br($v['description'] . '');
 			switch ($v['type']) {
 				case 'information':
 					$form->elements['service_script_container']['ss_field_answer_' . $k]['ss_field_answer_' . $k] = [
