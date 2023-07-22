@@ -31,6 +31,7 @@ class Services extends \Object\DataSource {
 		'location_id' => ['name' => 'Location', 'domain' => 'location_id'],
 		'existing_values' => ['name' => 'Existing Values', 'type' => 'mixed'],
 		'enforce_service_assignment' => ['name' => 'Enforce Service Assignment', 'type' => 'boolean'],
+		'active_only' => ['name' => 'Active Only', 'type' => 'boolean'],
 	];
 
 	public function query($parameters, $options = []) {
@@ -83,6 +84,10 @@ class Services extends \Object\DataSource {
 					$query->where('AND', ['inner_o2.ss_servcustloc_inactive', '=', 0]);
 				}, 'EXISTS');
 			});
+		}
+		// active only
+		if (!empty($parameters['active_only'])) {
+			$this->query->where('AND', ['a.ss_service_inactive', '=', 0]);
 		}
 	}
 }
