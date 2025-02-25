@@ -2,108 +2,151 @@
 
 namespace Numbers\Services\Services\Model\Service;
 class TypesAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Services\Services\Model\Service\Types::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ss_servtype_tenant_id = NULL;
 
-	/**
-	 * Code
-	 *
-	 *
-	 *
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_servtype_code = null;
 
-	/**
-	 * Service Type Group Code
-	 *
-	 *
-	 *
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_servtype_servtpgrp_code = null;
+    /**
+     * @var string
+     */
+    public string $object_table_class = \Numbers\Services\Services\Model\Service\Types::class;
 
-	/**
-	 * Name
-	 *
-	 *
-	 *
-	 * {domain{name}}
-	 *
-	 * @var string Domain: name Type: varchar
-	 */
-	public ?string $ss_servtype_name = null;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ss_servtype_tenant_id','ss_servtype_code'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ss_servtype_tenant_id = NULL {
+                        get => $this->ss_servtype_tenant_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servtype_tenant_id', $value);
+                            $this->ss_servtype_tenant_id = $value;
+                        }
+                    }
 
-	/**
-	 * Icon
-	 *
-	 *
-	 *
-	 * {domain{icon}}
-	 *
-	 * @var string Domain: icon Type: varchar
-	 */
-	public ?string $ss_servtype_icon = null;
+    /**
+     * Code
+     *
+     *
+     *
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_servtype_code = null {
+                        get => $this->ss_servtype_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servtype_code', $value);
+                            $this->ss_servtype_code = $value;
+                        }
+                    }
 
-	/**
-	 * Order
-	 *
-	 *
-	 *
-	 * {domain{order}}
-	 *
-	 * @var int Domain: order Type: integer
-	 */
-	public ?int $ss_servtype_order = 0;
+    /**
+     * Service Type Group Code
+     *
+     *
+     *
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_servtype_servtpgrp_code = null {
+                        get => $this->ss_servtype_servtpgrp_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servtype_servtpgrp_code', $value);
+                            $this->ss_servtype_servtpgrp_code = $value;
+                        }
+                    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servtype_inactive = 0;
+    /**
+     * Name
+     *
+     *
+     *
+     * {domain{name}}
+     *
+     * @var string|null Domain: name Type: varchar
+     */
+    public string|null $ss_servtype_name = null {
+                        get => $this->ss_servtype_name;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servtype_name', $value);
+                            $this->ss_servtype_name = $value;
+                        }
+                    }
 
-	/**
-	 * Optimistic Lock
-	 *
-	 *
-	 *
-	 * {domain{optimistic_lock}}
-	 *
-	 * @var string Domain: optimistic_lock Type: timestamp
-	 */
-	public ?string $ss_servtype_optimistic_lock = 'now()';
+    /**
+     * Icon
+     *
+     *
+     *
+     * {domain{icon}}
+     *
+     * @var string|null Domain: icon Type: varchar
+     */
+    public string|null $ss_servtype_icon = null {
+                        get => $this->ss_servtype_icon;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servtype_icon', $value);
+                            $this->ss_servtype_icon = $value;
+                        }
+                    }
+
+    /**
+     * Order
+     *
+     *
+     *
+     * {domain{order}}
+     *
+     * @var int|null Domain: order Type: integer
+     */
+    public int|null $ss_servtype_order = 0 {
+                        get => $this->ss_servtype_order;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servtype_order', $value);
+                            $this->ss_servtype_order = $value;
+                        }
+                    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servtype_inactive = 0 {
+                        get => $this->ss_servtype_inactive;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servtype_inactive', $value);
+                            $this->ss_servtype_inactive = $value;
+                        }
+                    }
+
+    /**
+     * Optimistic Lock
+     *
+     *
+     *
+     * {domain{optimistic_lock}}
+     *
+     * @var string|null Domain: optimistic_lock Type: timestamp
+     */
+    public string|null $ss_servtype_optimistic_lock = 'now()' {
+                        get => $this->ss_servtype_optimistic_lock;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servtype_optimistic_lock', $value);
+                            $this->ss_servtype_optimistic_lock = $value;
+                        }
+                    }
 }

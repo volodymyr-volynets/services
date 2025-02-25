@@ -2,86 +2,117 @@
 
 namespace Numbers\Services\Widgets\Complaints\Model;
 class StatusesAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Services\Widgets\Complaints\Model\Statuses::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ss_servcompstatus_tenant_id = NULL;
 
-	/**
-	 * Code
-	 *
-	 *
-	 *
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_servcompstatus_code = null;
 
-	/**
-	 * Name
-	 *
-	 *
-	 *
-	 * {domain{name}}
-	 *
-	 * @var string Domain: name Type: varchar
-	 */
-	public ?string $ss_servcompstatus_name = null;
+    /**
+     * @var string
+     */
+    public string $object_table_class = \Numbers\Services\Widgets\Complaints\Model\Statuses::class;
 
-	/**
-	 * Order
-	 *
-	 *
-	 *
-	 * {domain{order}}
-	 *
-	 * @var int Domain: order Type: integer
-	 */
-	public ?int $ss_servcompstatus_order = 0;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ss_servcompstatus_tenant_id','ss_servcompstatus_code'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ss_servcompstatus_tenant_id = NULL {
+                        get => $this->ss_servcompstatus_tenant_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcompstatus_tenant_id', $value);
+                            $this->ss_servcompstatus_tenant_id = $value;
+                        }
+                    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servcompstatus_inactive = 0;
+    /**
+     * Code
+     *
+     *
+     *
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_servcompstatus_code = null {
+                        get => $this->ss_servcompstatus_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcompstatus_code', $value);
+                            $this->ss_servcompstatus_code = $value;
+                        }
+                    }
 
-	/**
-	 * Optimistic Lock
-	 *
-	 *
-	 *
-	 * {domain{optimistic_lock}}
-	 *
-	 * @var string Domain: optimistic_lock Type: timestamp
-	 */
-	public ?string $ss_servcompstatus_optimistic_lock = 'now()';
+    /**
+     * Name
+     *
+     *
+     *
+     * {domain{name}}
+     *
+     * @var string|null Domain: name Type: varchar
+     */
+    public string|null $ss_servcompstatus_name = null {
+                        get => $this->ss_servcompstatus_name;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcompstatus_name', $value);
+                            $this->ss_servcompstatus_name = $value;
+                        }
+                    }
+
+    /**
+     * Order
+     *
+     *
+     *
+     * {domain{order}}
+     *
+     * @var int|null Domain: order Type: integer
+     */
+    public int|null $ss_servcompstatus_order = 0 {
+                        get => $this->ss_servcompstatus_order;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcompstatus_order', $value);
+                            $this->ss_servcompstatus_order = $value;
+                        }
+                    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servcompstatus_inactive = 0 {
+                        get => $this->ss_servcompstatus_inactive;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcompstatus_inactive', $value);
+                            $this->ss_servcompstatus_inactive = $value;
+                        }
+                    }
+
+    /**
+     * Optimistic Lock
+     *
+     *
+     *
+     * {domain{optimistic_lock}}
+     *
+     * @var string|null Domain: optimistic_lock Type: timestamp
+     */
+    public string|null $ss_servcompstatus_optimistic_lock = 'now()' {
+                        get => $this->ss_servcompstatus_optimistic_lock;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcompstatus_optimistic_lock', $value);
+                            $this->ss_servcompstatus_optimistic_lock = $value;
+                        }
+                    }
 }

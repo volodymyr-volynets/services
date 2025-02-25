@@ -2,119 +2,168 @@
 
 namespace Numbers\Services\Services\Model\Disposition;
 class CodesAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Services\Services\Model\Disposition\Codes::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ss_disposition_tenant_id = NULL;
 
-	/**
-	 * Disposition #
-	 *
-	 *
-	 *
-	 * {domain{disposition_id_sequence}}
-	 *
-	 * @var int Domain: disposition_id_sequence Type: serial
-	 */
-	public ?int $ss_disposition_id = null;
 
-	/**
-	 * Code
-	 *
-	 *
-	 *
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_disposition_code = null;
+    /**
+     * @var string
+     */
+    public string $object_table_class = \Numbers\Services\Services\Model\Disposition\Codes::class;
 
-	/**
-	 * Type
-	 *
-	 *
-	 * {options_model{\Numbers\Services\Services\Model\Disposition\Types}}
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_disposition_type_code = null;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ss_disposition_tenant_id','ss_disposition_id'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ss_disposition_tenant_id = NULL {
+                        get => $this->ss_disposition_tenant_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_disposition_tenant_id', $value);
+                            $this->ss_disposition_tenant_id = $value;
+                        }
+                    }
 
-	/**
-	 * Name
-	 *
-	 *
-	 *
-	 * {domain{name}}
-	 *
-	 * @var string Domain: name Type: varchar
-	 */
-	public ?string $ss_disposition_name = null;
+    /**
+     * Disposition #
+     *
+     *
+     *
+     * {domain{disposition_id_sequence}}
+     *
+     * @var int|null Domain: disposition_id_sequence Type: serial
+     */
+    public int|null $ss_disposition_id = null {
+                        get => $this->ss_disposition_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_disposition_id', $value);
+                            $this->ss_disposition_id = $value;
+                        }
+                    }
 
-	/**
-	 * Icon
-	 *
-	 *
-	 *
-	 * {domain{icon}}
-	 *
-	 * @var string Domain: icon Type: varchar
-	 */
-	public ?string $ss_disposition_icon = null;
+    /**
+     * Code
+     *
+     *
+     *
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_disposition_code = null {
+                        get => $this->ss_disposition_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_disposition_code', $value);
+                            $this->ss_disposition_code = $value;
+                        }
+                    }
 
-	/**
-	 * Notification Emails
-	 *
-	 *
-	 *
-	 * {domain{description}}
-	 *
-	 * @var string Domain: description Type: varchar
-	 */
-	public ?string $ss_disposition_notification_emails = null;
+    /**
+     * Type
+     *
+     *
+     * {options_model{\Numbers\Services\Services\Model\Disposition\Types}}
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_disposition_type_code = null {
+                        get => $this->ss_disposition_type_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_disposition_type_code', $value);
+                            $this->ss_disposition_type_code = $value;
+                        }
+                    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_disposition_inactive = 0;
+    /**
+     * Name
+     *
+     *
+     *
+     * {domain{name}}
+     *
+     * @var string|null Domain: name Type: varchar
+     */
+    public string|null $ss_disposition_name = null {
+                        get => $this->ss_disposition_name;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_disposition_name', $value);
+                            $this->ss_disposition_name = $value;
+                        }
+                    }
 
-	/**
-	 * Optimistic Lock
-	 *
-	 *
-	 *
-	 * {domain{optimistic_lock}}
-	 *
-	 * @var string Domain: optimistic_lock Type: timestamp
-	 */
-	public ?string $ss_disposition_optimistic_lock = 'now()';
+    /**
+     * Icon
+     *
+     *
+     *
+     * {domain{icon}}
+     *
+     * @var string|null Domain: icon Type: varchar
+     */
+    public string|null $ss_disposition_icon = null {
+                        get => $this->ss_disposition_icon;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_disposition_icon', $value);
+                            $this->ss_disposition_icon = $value;
+                        }
+                    }
+
+    /**
+     * Notification Emails
+     *
+     *
+     *
+     * {domain{description}}
+     *
+     * @var string|null Domain: description Type: varchar
+     */
+    public string|null $ss_disposition_notification_emails = null {
+                        get => $this->ss_disposition_notification_emails;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_disposition_notification_emails', $value);
+                            $this->ss_disposition_notification_emails = $value;
+                        }
+                    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_disposition_inactive = 0 {
+                        get => $this->ss_disposition_inactive;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_disposition_inactive', $value);
+                            $this->ss_disposition_inactive = $value;
+                        }
+                    }
+
+    /**
+     * Optimistic Lock
+     *
+     *
+     *
+     * {domain{optimistic_lock}}
+     *
+     * @var string|null Domain: optimistic_lock Type: timestamp
+     */
+    public string|null $ss_disposition_optimistic_lock = 'now()' {
+                        get => $this->ss_disposition_optimistic_lock;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_disposition_optimistic_lock', $value);
+                            $this->ss_disposition_optimistic_lock = $value;
+                        }
+                    }
 }

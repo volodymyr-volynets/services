@@ -2,152 +2,219 @@
 
 namespace Numbers\Services\Services\Model\ServiceScript;
 class QuestionsAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Services\Services\Model\ServiceScript\Questions::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ss_servquestion_tenant_id = NULL;
 
-	/**
-	 * Service Script #
-	 *
-	 *
-	 *
-	 * {domain{service_script_id}}
-	 *
-	 * @var int Domain: service_script_id Type: integer
-	 */
-	public ?int $ss_servquestion_service_script_id = NULL;
 
-	/**
-	 * Question #
-	 *
-	 *
-	 *
-	 * {domain{question_id}}
-	 *
-	 * @var int Domain: question_id Type: integer
-	 */
-	public ?int $ss_servquestion_id = NULL;
+    /**
+     * @var string
+     */
+    public string $object_table_class = \Numbers\Services\Services\Model\ServiceScript\Questions::class;
 
-	/**
-	 * Name
-	 *
-	 *
-	 *
-	 * {domain{description}}
-	 *
-	 * @var string Domain: description Type: varchar
-	 */
-	public ?string $ss_servquestion_name = null;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ss_servquestion_tenant_id','ss_servquestion_service_script_id','ss_servquestion_id'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ss_servquestion_tenant_id = NULL {
+                        get => $this->ss_servquestion_tenant_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_tenant_id', $value);
+                            $this->ss_servquestion_tenant_id = $value;
+                        }
+                    }
 
-	/**
-	 * Order
-	 *
-	 *
-	 *
-	 * {domain{order}}
-	 *
-	 * @var int Domain: order Type: integer
-	 */
-	public ?int $ss_servquestion_order = 0;
+    /**
+     * Service Script #
+     *
+     *
+     *
+     * {domain{service_script_id}}
+     *
+     * @var int|null Domain: service_script_id Type: integer
+     */
+    public int|null $ss_servquestion_service_script_id = NULL {
+                        get => $this->ss_servquestion_service_script_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_service_script_id', $value);
+                            $this->ss_servquestion_service_script_id = $value;
+                        }
+                    }
 
-	/**
-	 * Language Code
-	 *
-	 *
-	 *
-	 * {domain{language_code}}
-	 *
-	 * @var string Domain: language_code Type: char
-	 */
-	public ?string $ss_servquestion_language_code = null;
+    /**
+     * Question #
+     *
+     *
+     *
+     * {domain{question_id}}
+     *
+     * @var int|null Domain: question_id Type: integer
+     */
+    public int|null $ss_servquestion_id = NULL {
+                        get => $this->ss_servquestion_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_id', $value);
+                            $this->ss_servquestion_id = $value;
+                        }
+                    }
 
-	/**
-	 * Type
-	 *
-	 *
-	 * {options_model{\Numbers\Services\Services\Model\ServiceScript\Question\Types}}
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_servquestion_type_code = null;
+    /**
+     * Name
+     *
+     *
+     *
+     * {domain{description}}
+     *
+     * @var string|null Domain: description Type: varchar
+     */
+    public string|null $ss_servquestion_name = null {
+                        get => $this->ss_servquestion_name;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_name', $value);
+                            $this->ss_servquestion_name = $value;
+                        }
+                    }
 
-	/**
-	 * Model #
-	 *
-	 *
-	 *
-	 * {domain{group_id}}
-	 *
-	 * @var int Domain: group_id Type: integer
-	 */
-	public ?int $ss_servquestion_model_id = NULL;
+    /**
+     * Order
+     *
+     *
+     *
+     * {domain{order}}
+     *
+     * @var int|null Domain: order Type: integer
+     */
+    public int|null $ss_servquestion_order = 0 {
+                        get => $this->ss_servquestion_order;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_order', $value);
+                            $this->ss_servquestion_order = $value;
+                        }
+                    }
 
-	/**
-	 * Required
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servquestion_required = 0;
+    /**
+     * Language Code
+     *
+     *
+     *
+     * {domain{language_code}}
+     *
+     * @var string|null Domain: language_code Type: char
+     */
+    public string|null $ss_servquestion_language_code = null {
+                        get => $this->ss_servquestion_language_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_language_code', $value);
+                            $this->ss_servquestion_language_code = $value;
+                        }
+                    }
 
-	/**
-	 * All Regions
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servquestion_all_regions = 0;
+    /**
+     * Type
+     *
+     *
+     * {options_model{\Numbers\Services\Services\Model\ServiceScript\Question\Types}}
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_servquestion_type_code = null {
+                        get => $this->ss_servquestion_type_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_type_code', $value);
+                            $this->ss_servquestion_type_code = $value;
+                        }
+                    }
 
-	/**
-	 * All Channels
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servquestion_all_channels = 0;
+    /**
+     * Model #
+     *
+     *
+     *
+     * {domain{group_id}}
+     *
+     * @var int|null Domain: group_id Type: integer
+     */
+    public int|null $ss_servquestion_model_id = NULL {
+                        get => $this->ss_servquestion_model_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_model_id', $value);
+                            $this->ss_servquestion_model_id = $value;
+                        }
+                    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servquestion_inactive = 0;
+    /**
+     * Required
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servquestion_required = 0 {
+                        get => $this->ss_servquestion_required;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_required', $value);
+                            $this->ss_servquestion_required = $value;
+                        }
+                    }
+
+    /**
+     * All Regions
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servquestion_all_regions = 0 {
+                        get => $this->ss_servquestion_all_regions;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_all_regions', $value);
+                            $this->ss_servquestion_all_regions = $value;
+                        }
+                    }
+
+    /**
+     * All Channels
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servquestion_all_channels = 0 {
+                        get => $this->ss_servquestion_all_channels;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_all_channels', $value);
+                            $this->ss_servquestion_all_channels = $value;
+                        }
+                    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servquestion_inactive = 0 {
+                        get => $this->ss_servquestion_inactive;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servquestion_inactive', $value);
+                            $this->ss_servquestion_inactive = $value;
+                        }
+                    }
 }

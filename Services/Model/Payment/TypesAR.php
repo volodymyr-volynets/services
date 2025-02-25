@@ -2,119 +2,168 @@
 
 namespace Numbers\Services\Services\Model\Payment;
 class TypesAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Services\Services\Model\Payment\Types::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ss_serpaytype_tenant_id = NULL;
 
-	/**
-	 * Code
-	 *
-	 *
-	 *
-	 * {domain{type_code}}
-	 *
-	 * @var string Domain: type_code Type: varchar
-	 */
-	public ?string $ss_serpaytype_code = null;
 
-	/**
-	 * Name
-	 *
-	 *
-	 *
-	 * {domain{name}}
-	 *
-	 * @var string Domain: name Type: varchar
-	 */
-	public ?string $ss_serpaytype_name = null;
+    /**
+     * @var string
+     */
+    public string $object_table_class = \Numbers\Services\Services\Model\Payment\Types::class;
 
-	/**
-	 * Icon
-	 *
-	 *
-	 *
-	 * {domain{icon}}
-	 *
-	 * @var string Domain: icon Type: varchar
-	 */
-	public ?string $ss_serpaytype_icon = null;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ss_serpaytype_tenant_id','ss_serpaytype_code'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ss_serpaytype_tenant_id = NULL {
+                        get => $this->ss_serpaytype_tenant_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_serpaytype_tenant_id', $value);
+                            $this->ss_serpaytype_tenant_id = $value;
+                        }
+                    }
 
-	/**
-	 * Order
-	 *
-	 *
-	 *
-	 * {domain{order}}
-	 *
-	 * @var int Domain: order Type: integer
-	 */
-	public ?int $ss_serpaytype_order = 0;
+    /**
+     * Code
+     *
+     *
+     *
+     * {domain{type_code}}
+     *
+     * @var string|null Domain: type_code Type: varchar
+     */
+    public string|null $ss_serpaytype_code = null {
+                        get => $this->ss_serpaytype_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_serpaytype_code', $value);
+                            $this->ss_serpaytype_code = $value;
+                        }
+                    }
 
-	/**
-	 * Group #
-	 *
-	 *
-	 * {options_model{\Numbers\Services\Services\Model\Payment\Type\Groups}}
-	 * {domain{type_id}}
-	 *
-	 * @var int Domain: type_id Type: smallint
-	 */
-	public ?int $ss_serpaytype_group_id = NULL;
+    /**
+     * Name
+     *
+     *
+     *
+     * {domain{name}}
+     *
+     * @var string|null Domain: name Type: varchar
+     */
+    public string|null $ss_serpaytype_name = null {
+                        get => $this->ss_serpaytype_name;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_serpaytype_name', $value);
+                            $this->ss_serpaytype_name = $value;
+                        }
+                    }
 
-	/**
-	 * Regular Expression
-	 *
-	 *
-	 *
-	 * {domain{code}}
-	 *
-	 * @var string Domain: code Type: varchar
-	 */
-	public ?string $ss_serpaytype_regular_expression = null;
+    /**
+     * Icon
+     *
+     *
+     *
+     * {domain{icon}}
+     *
+     * @var string|null Domain: icon Type: varchar
+     */
+    public string|null $ss_serpaytype_icon = null {
+                        get => $this->ss_serpaytype_icon;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_serpaytype_icon', $value);
+                            $this->ss_serpaytype_icon = $value;
+                        }
+                    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_serpaytype_inactive = 0;
+    /**
+     * Order
+     *
+     *
+     *
+     * {domain{order}}
+     *
+     * @var int|null Domain: order Type: integer
+     */
+    public int|null $ss_serpaytype_order = 0 {
+                        get => $this->ss_serpaytype_order;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_serpaytype_order', $value);
+                            $this->ss_serpaytype_order = $value;
+                        }
+                    }
 
-	/**
-	 * Optimistic Lock
-	 *
-	 *
-	 *
-	 * {domain{optimistic_lock}}
-	 *
-	 * @var string Domain: optimistic_lock Type: timestamp
-	 */
-	public ?string $ss_serpaytype_optimistic_lock = 'now()';
+    /**
+     * Group #
+     *
+     *
+     * {options_model{\Numbers\Services\Services\Model\Payment\Type\Groups}}
+     * {domain{type_id}}
+     *
+     * @var int|null Domain: type_id Type: smallint
+     */
+    public int|null $ss_serpaytype_group_id = NULL {
+                        get => $this->ss_serpaytype_group_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_serpaytype_group_id', $value);
+                            $this->ss_serpaytype_group_id = $value;
+                        }
+                    }
+
+    /**
+     * Regular Expression
+     *
+     *
+     *
+     * {domain{code}}
+     *
+     * @var string|null Domain: code Type: varchar
+     */
+    public string|null $ss_serpaytype_regular_expression = null {
+                        get => $this->ss_serpaytype_regular_expression;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_serpaytype_regular_expression', $value);
+                            $this->ss_serpaytype_regular_expression = $value;
+                        }
+                    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_serpaytype_inactive = 0 {
+                        get => $this->ss_serpaytype_inactive;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_serpaytype_inactive', $value);
+                            $this->ss_serpaytype_inactive = $value;
+                        }
+                    }
+
+    /**
+     * Optimistic Lock
+     *
+     *
+     *
+     * {domain{optimistic_lock}}
+     *
+     * @var string|null Domain: optimistic_lock Type: timestamp
+     */
+    public string|null $ss_serpaytype_optimistic_lock = 'now()' {
+                        get => $this->ss_serpaytype_optimistic_lock;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_serpaytype_optimistic_lock', $value);
+                            $this->ss_serpaytype_optimistic_lock = $value;
+                        }
+                    }
 }

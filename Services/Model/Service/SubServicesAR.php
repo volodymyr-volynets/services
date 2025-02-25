@@ -2,86 +2,117 @@
 
 namespace Numbers\Services\Services\Model\Service;
 class SubServicesAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Services\Services\Model\Service\SubServices::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ss_servsubserv_tenant_id = NULL;
 
-	/**
-	 * Timestamp
-	 *
-	 *
-	 *
-	 * {domain{timestamp_now}}
-	 *
-	 * @var string Domain: timestamp_now Type: timestamp
-	 */
-	public ?string $ss_servsubserv_timestamp = 'now()';
 
-	/**
-	 * Service #
-	 *
-	 *
-	 *
-	 * {domain{service_id}}
-	 *
-	 * @var int Domain: service_id Type: integer
-	 */
-	public ?int $ss_servsubserv_service_id = NULL;
+    /**
+     * @var string
+     */
+    public string $object_table_class = \Numbers\Services\Services\Model\Service\SubServices::class;
 
-	/**
-	 * Name
-	 *
-	 *
-	 *
-	 * {domain{name}}
-	 *
-	 * @var string Domain: name Type: varchar
-	 */
-	public ?string $ss_servsubserv_name = null;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ss_servsubserv_tenant_id','ss_servsubserv_service_id','ss_servsubserv_name'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ss_servsubserv_tenant_id = NULL {
+                        get => $this->ss_servsubserv_tenant_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servsubserv_tenant_id', $value);
+                            $this->ss_servsubserv_tenant_id = $value;
+                        }
+                    }
 
-	/**
-	 * Default
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servsubserv_default = 0;
+    /**
+     * Timestamp
+     *
+     *
+     *
+     * {domain{timestamp_now}}
+     *
+     * @var string|null Domain: timestamp_now Type: timestamp
+     */
+    public string|null $ss_servsubserv_timestamp = 'now()' {
+                        get => $this->ss_servsubserv_timestamp;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servsubserv_timestamp', $value);
+                            $this->ss_servsubserv_timestamp = $value;
+                        }
+                    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servsubserv_inactive = 0;
+    /**
+     * Service #
+     *
+     *
+     *
+     * {domain{service_id}}
+     *
+     * @var int|null Domain: service_id Type: integer
+     */
+    public int|null $ss_servsubserv_service_id = NULL {
+                        get => $this->ss_servsubserv_service_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servsubserv_service_id', $value);
+                            $this->ss_servsubserv_service_id = $value;
+                        }
+                    }
+
+    /**
+     * Name
+     *
+     *
+     *
+     * {domain{name}}
+     *
+     * @var string|null Domain: name Type: varchar
+     */
+    public string|null $ss_servsubserv_name = null {
+                        get => $this->ss_servsubserv_name;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servsubserv_name', $value);
+                            $this->ss_servsubserv_name = $value;
+                        }
+                    }
+
+    /**
+     * Default
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servsubserv_default = 0 {
+                        get => $this->ss_servsubserv_default;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servsubserv_default', $value);
+                            $this->ss_servsubserv_default = $value;
+                        }
+                    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servsubserv_inactive = 0 {
+                        get => $this->ss_servsubserv_inactive;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servsubserv_inactive', $value);
+                            $this->ss_servsubserv_inactive = $value;
+                        }
+                    }
 }

@@ -2,119 +2,168 @@
 
 namespace Numbers\Services\Services\Model\Service\Price;
 class MarkupsAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Services\Services\Model\Service\Price\Markups::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ss_servprcmarkup_tenant_id = NULL;
 
-	/**
-	 * Timestamp
-	 *
-	 *
-	 *
-	 * {domain{timestamp_now}}
-	 *
-	 * @var string Domain: timestamp_now Type: timestamp
-	 */
-	public ?string $ss_servprcmarkup_timestamp = 'now()';
 
-	/**
-	 * Service #
-	 *
-	 *
-	 *
-	 * {domain{service_id}}
-	 *
-	 * @var int Domain: service_id Type: integer
-	 */
-	public ?int $ss_servprcmarkup_service_id = NULL;
+    /**
+     * @var string
+     */
+    public string $object_table_class = \Numbers\Services\Services\Model\Service\Price\Markups::class;
 
-	/**
-	 * Currency Code
-	 *
-	 *
-	 *
-	 * {domain{currency_code}}
-	 *
-	 * @var string Domain: currency_code Type: char
-	 */
-	public ?string $ss_servprcmarkup_currency_code = null;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ss_servprcmarkup_tenant_id','ss_servprcmarkup_service_id','ss_servprcmarkup_currency_code','ss_servprcmarkup_detail_id'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ss_servprcmarkup_tenant_id = NULL {
+                        get => $this->ss_servprcmarkup_tenant_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servprcmarkup_tenant_id', $value);
+                            $this->ss_servprcmarkup_tenant_id = $value;
+                        }
+                    }
 
-	/**
-	 * Detail #
-	 *
-	 *
-	 *
-	 * {domain{group_id}}
-	 *
-	 * @var int Domain: group_id Type: integer
-	 */
-	public ?int $ss_servprcmarkup_detail_id = NULL;
+    /**
+     * Timestamp
+     *
+     *
+     *
+     * {domain{timestamp_now}}
+     *
+     * @var string|null Domain: timestamp_now Type: timestamp
+     */
+    public string|null $ss_servprcmarkup_timestamp = 'now()' {
+                        get => $this->ss_servprcmarkup_timestamp;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servprcmarkup_timestamp', $value);
+                            $this->ss_servprcmarkup_timestamp = $value;
+                        }
+                    }
 
-	/**
-	 * Under Amount
-	 *
-	 *
-	 *
-	 * {domain{amount}}
-	 *
-	 * @var bcnumeric Domain: amount Type: bcnumeric
-	 */
-	public ?bcnumeric $ss_servprcmarkup_under_amount = '0.00';
+    /**
+     * Service #
+     *
+     *
+     *
+     * {domain{service_id}}
+     *
+     * @var int|null Domain: service_id Type: integer
+     */
+    public int|null $ss_servprcmarkup_service_id = NULL {
+                        get => $this->ss_servprcmarkup_service_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servprcmarkup_service_id', $value);
+                            $this->ss_servprcmarkup_service_id = $value;
+                        }
+                    }
 
-	/**
-	 * Type
-	 *
-	 *
-	 * {options_model{\Numbers\Services\Services\Model\Service\Price\Types}}
-	 * {domain{type_id}}
-	 *
-	 * @var int Domain: type_id Type: smallint
-	 */
-	public ?int $ss_servprcmarkup_type_id = NULL;
+    /**
+     * Currency Code
+     *
+     *
+     *
+     * {domain{currency_code}}
+     *
+     * @var string|null Domain: currency_code Type: char
+     */
+    public string|null $ss_servprcmarkup_currency_code = null {
+                        get => $this->ss_servprcmarkup_currency_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servprcmarkup_currency_code', $value);
+                            $this->ss_servprcmarkup_currency_code = $value;
+                        }
+                    }
 
-	/**
-	 * Markup
-	 *
-	 *
-	 *
-	 * {domain{amount}}
-	 *
-	 * @var bcnumeric Domain: amount Type: bcnumeric
-	 */
-	public ?bcnumeric $ss_servprcmarkup_markup = '0.00';
+    /**
+     * Detail #
+     *
+     *
+     *
+     * {domain{group_id}}
+     *
+     * @var int|null Domain: group_id Type: integer
+     */
+    public int|null $ss_servprcmarkup_detail_id = NULL {
+                        get => $this->ss_servprcmarkup_detail_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servprcmarkup_detail_id', $value);
+                            $this->ss_servprcmarkup_detail_id = $value;
+                        }
+                    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servprcmarkup_inactive = 0;
+    /**
+     * Under Amount
+     *
+     *
+     *
+     * {domain{amount}}
+     *
+     * @var mixed Domain: amount Type: bcnumeric
+     */
+    public mixed $ss_servprcmarkup_under_amount = '0.00' {
+                        get => $this->ss_servprcmarkup_under_amount;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servprcmarkup_under_amount', $value);
+                            $this->ss_servprcmarkup_under_amount = $value;
+                        }
+                    }
+
+    /**
+     * Type
+     *
+     *
+     * {options_model{\Numbers\Services\Services\Model\Service\Price\Types}}
+     * {domain{type_id}}
+     *
+     * @var int|null Domain: type_id Type: smallint
+     */
+    public int|null $ss_servprcmarkup_type_id = NULL {
+                        get => $this->ss_servprcmarkup_type_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servprcmarkup_type_id', $value);
+                            $this->ss_servprcmarkup_type_id = $value;
+                        }
+                    }
+
+    /**
+     * Markup
+     *
+     *
+     *
+     * {domain{amount}}
+     *
+     * @var mixed Domain: amount Type: bcnumeric
+     */
+    public mixed $ss_servprcmarkup_markup = '0.00' {
+                        get => $this->ss_servprcmarkup_markup;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servprcmarkup_markup', $value);
+                            $this->ss_servprcmarkup_markup = $value;
+                        }
+                    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servprcmarkup_inactive = 0 {
+                        get => $this->ss_servprcmarkup_inactive;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servprcmarkup_inactive', $value);
+                            $this->ss_servprcmarkup_inactive = $value;
+                        }
+                    }
 }

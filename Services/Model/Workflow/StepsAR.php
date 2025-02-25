@@ -2,86 +2,117 @@
 
 namespace Numbers\Services\Services\Model\Workflow;
 class StepsAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Services\Services\Model\Workflow\Steps::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ss_servworkstep_tenant_id = NULL;
 
-	/**
-	 * Workflow Code
-	 *
-	 *
-	 *
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_servworkstep_servworkflow_code = null;
 
-	/**
-	 * Parent Status Code
-	 *
-	 *
-	 *
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_servworkstep_parent_servstatus_code = null;
+    /**
+     * @var string
+     */
+    public string $object_table_class = \Numbers\Services\Services\Model\Workflow\Steps::class;
 
-	/**
-	 * Child Status Code
-	 *
-	 *
-	 *
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_servworkstep_child_servstatus_code = null;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ss_servworkstep_tenant_id','ss_servworkstep_servworkflow_code','ss_servworkstep_parent_servstatus_code','ss_servworkstep_child_servstatus_code'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ss_servworkstep_tenant_id = NULL {
+                        get => $this->ss_servworkstep_tenant_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servworkstep_tenant_id', $value);
+                            $this->ss_servworkstep_tenant_id = $value;
+                        }
+                    }
 
-	/**
-	 * Name
-	 *
-	 *
-	 *
-	 * {domain{name}}
-	 *
-	 * @var string Domain: name Type: varchar
-	 */
-	public ?string $ss_servworkstep_name = null;
+    /**
+     * Workflow Code
+     *
+     *
+     *
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_servworkstep_servworkflow_code = null {
+                        get => $this->ss_servworkstep_servworkflow_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servworkstep_servworkflow_code', $value);
+                            $this->ss_servworkstep_servworkflow_code = $value;
+                        }
+                    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servworkstep_inactive = 0;
+    /**
+     * Parent Status Code
+     *
+     *
+     *
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_servworkstep_parent_servstatus_code = null {
+                        get => $this->ss_servworkstep_parent_servstatus_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servworkstep_parent_servstatus_code', $value);
+                            $this->ss_servworkstep_parent_servstatus_code = $value;
+                        }
+                    }
+
+    /**
+     * Child Status Code
+     *
+     *
+     *
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_servworkstep_child_servstatus_code = null {
+                        get => $this->ss_servworkstep_child_servstatus_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servworkstep_child_servstatus_code', $value);
+                            $this->ss_servworkstep_child_servstatus_code = $value;
+                        }
+                    }
+
+    /**
+     * Name
+     *
+     *
+     *
+     * {domain{name}}
+     *
+     * @var string|null Domain: name Type: varchar
+     */
+    public string|null $ss_servworkstep_name = null {
+                        get => $this->ss_servworkstep_name;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servworkstep_name', $value);
+                            $this->ss_servworkstep_name = $value;
+                        }
+                    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servworkstep_inactive = 0 {
+                        get => $this->ss_servworkstep_inactive;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servworkstep_inactive', $value);
+                            $this->ss_servworkstep_inactive = $value;
+                        }
+                    }
 }

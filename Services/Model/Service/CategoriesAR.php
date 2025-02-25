@@ -2,97 +2,134 @@
 
 namespace Numbers\Services\Services\Model\Service;
 class CategoriesAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Services\Services\Model\Service\Categories::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ss_servcategory_tenant_id = NULL;
 
-	/**
-	 * Category #
-	 *
-	 *
-	 *
-	 * {domain{category_id_sequence}}
-	 *
-	 * @var int Domain: category_id_sequence Type: serial
-	 */
-	public ?int $ss_servcategory_id = null;
 
-	/**
-	 * Code
-	 *
-	 *
-	 *
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_servcategory_code = null;
+    /**
+     * @var string
+     */
+    public string $object_table_class = \Numbers\Services\Services\Model\Service\Categories::class;
 
-	/**
-	 * Name
-	 *
-	 *
-	 *
-	 * {domain{name}}
-	 *
-	 * @var string Domain: name Type: varchar
-	 */
-	public ?string $ss_servcategory_name = null;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ss_servcategory_tenant_id','ss_servcategory_id'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ss_servcategory_tenant_id = NULL {
+                        get => $this->ss_servcategory_tenant_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcategory_tenant_id', $value);
+                            $this->ss_servcategory_tenant_id = $value;
+                        }
+                    }
 
-	/**
-	 * Icon
-	 *
-	 *
-	 *
-	 * {domain{icon}}
-	 *
-	 * @var string Domain: icon Type: varchar
-	 */
-	public ?string $ss_servcategory_icon = null;
+    /**
+     * Category #
+     *
+     *
+     *
+     * {domain{category_id_sequence}}
+     *
+     * @var int|null Domain: category_id_sequence Type: serial
+     */
+    public int|null $ss_servcategory_id = null {
+                        get => $this->ss_servcategory_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcategory_id', $value);
+                            $this->ss_servcategory_id = $value;
+                        }
+                    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servcategory_inactive = 0;
+    /**
+     * Code
+     *
+     *
+     *
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_servcategory_code = null {
+                        get => $this->ss_servcategory_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcategory_code', $value);
+                            $this->ss_servcategory_code = $value;
+                        }
+                    }
 
-	/**
-	 * Optimistic Lock
-	 *
-	 *
-	 *
-	 * {domain{optimistic_lock}}
-	 *
-	 * @var string Domain: optimistic_lock Type: timestamp
-	 */
-	public ?string $ss_servcategory_optimistic_lock = 'now()';
+    /**
+     * Name
+     *
+     *
+     *
+     * {domain{name}}
+     *
+     * @var string|null Domain: name Type: varchar
+     */
+    public string|null $ss_servcategory_name = null {
+                        get => $this->ss_servcategory_name;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcategory_name', $value);
+                            $this->ss_servcategory_name = $value;
+                        }
+                    }
+
+    /**
+     * Icon
+     *
+     *
+     *
+     * {domain{icon}}
+     *
+     * @var string|null Domain: icon Type: varchar
+     */
+    public string|null $ss_servcategory_icon = null {
+                        get => $this->ss_servcategory_icon;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcategory_icon', $value);
+                            $this->ss_servcategory_icon = $value;
+                        }
+                    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servcategory_inactive = 0 {
+                        get => $this->ss_servcategory_inactive;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcategory_inactive', $value);
+                            $this->ss_servcategory_inactive = $value;
+                        }
+                    }
+
+    /**
+     * Optimistic Lock
+     *
+     *
+     *
+     * {domain{optimistic_lock}}
+     *
+     * @var string|null Domain: optimistic_lock Type: timestamp
+     */
+    public string|null $ss_servcategory_optimistic_lock = 'now()' {
+                        get => $this->ss_servcategory_optimistic_lock;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servcategory_optimistic_lock', $value);
+                            $this->ss_servcategory_optimistic_lock = $value;
+                        }
+                    }
 }

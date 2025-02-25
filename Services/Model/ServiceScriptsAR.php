@@ -2,141 +2,202 @@
 
 namespace Numbers\Services\Services\Model;
 class ServiceScriptsAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Services\Services\Model\ServiceScripts::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ss_servscript_tenant_id = NULL;
 
-	/**
-	 * Service Script #
-	 *
-	 *
-	 *
-	 * {domain{service_script_id_sequence}}
-	 *
-	 * @var int Domain: service_script_id_sequence Type: serial
-	 */
-	public ?int $ss_servscript_id = null;
 
-	/**
-	 * Code
-	 *
-	 *
-	 *
-	 * {domain{group_code}}
-	 *
-	 * @var string Domain: group_code Type: varchar
-	 */
-	public ?string $ss_servscript_code = null;
+    /**
+     * @var string
+     */
+    public string $object_table_class = \Numbers\Services\Services\Model\ServiceScripts::class;
 
-	/**
-	 * Name
-	 *
-	 *
-	 *
-	 * {domain{name}}
-	 *
-	 * @var string Domain: name Type: varchar
-	 */
-	public ?string $ss_servscript_name = null;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ss_servscript_tenant_id','ss_servscript_id'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ss_servscript_tenant_id = NULL {
+                        get => $this->ss_servscript_tenant_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_tenant_id', $value);
+                            $this->ss_servscript_tenant_id = $value;
+                        }
+                    }
 
-	/**
-	 * Type #
-	 *
-	 *
-	 * {options_model{\Numbers\Services\Services\Model\ServiceScript\Types}}
-	 * {domain{type_id}}
-	 *
-	 * @var int Domain: type_id Type: smallint
-	 */
-	public ?int $ss_servscript_type_id = 10;
+    /**
+     * Service Script #
+     *
+     *
+     *
+     * {domain{service_script_id_sequence}}
+     *
+     * @var int|null Domain: service_script_id_sequence Type: serial
+     */
+    public int|null $ss_servscript_id = null {
+                        get => $this->ss_servscript_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_id', $value);
+                            $this->ss_servscript_id = $value;
+                        }
+                    }
 
-	/**
-	 * Versioned
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servscript_versioned = 0;
+    /**
+     * Code
+     *
+     *
+     *
+     * {domain{group_code}}
+     *
+     * @var string|null Domain: group_code Type: varchar
+     */
+    public string|null $ss_servscript_code = null {
+                        get => $this->ss_servscript_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_code', $value);
+                            $this->ss_servscript_code = $value;
+                        }
+                    }
 
-	/**
-	 * Version Service Script #
-	 *
-	 *
-	 *
-	 * {domain{service_script_id}}
-	 *
-	 * @var int Domain: service_script_id Type: integer
-	 */
-	public ?int $ss_servscript_version_service_script_id = NULL;
+    /**
+     * Name
+     *
+     *
+     *
+     * {domain{name}}
+     *
+     * @var string|null Domain: name Type: varchar
+     */
+    public string|null $ss_servscript_name = null {
+                        get => $this->ss_servscript_name;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_name', $value);
+                            $this->ss_servscript_name = $value;
+                        }
+                    }
 
-	/**
-	 * Version Code
-	 *
-	 *
-	 *
-	 * {domain{version_code}}
-	 *
-	 * @var string Domain: version_code Type: varchar
-	 */
-	public ?string $ss_servscript_version_code = null;
+    /**
+     * Type #
+     *
+     *
+     * {options_model{\Numbers\Services\Services\Model\ServiceScript\Types}}
+     * {domain{type_id}}
+     *
+     * @var int|null Domain: type_id Type: smallint
+     */
+    public int|null $ss_servscript_type_id = 10 {
+                        get => $this->ss_servscript_type_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_type_id', $value);
+                            $this->ss_servscript_type_id = $value;
+                        }
+                    }
 
-	/**
-	 * Version Name
-	 *
-	 *
-	 *
-	 * {domain{name}}
-	 *
-	 * @var string Domain: name Type: varchar
-	 */
-	public ?string $ss_servscript_version_name = null;
+    /**
+     * Versioned
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servscript_versioned = 0 {
+                        get => $this->ss_servscript_versioned;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_versioned', $value);
+                            $this->ss_servscript_versioned = $value;
+                        }
+                    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ss_servscript_inactive = 0;
+    /**
+     * Version Service Script #
+     *
+     *
+     *
+     * {domain{service_script_id}}
+     *
+     * @var int|null Domain: service_script_id Type: integer
+     */
+    public int|null $ss_servscript_version_service_script_id = NULL {
+                        get => $this->ss_servscript_version_service_script_id;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_version_service_script_id', $value);
+                            $this->ss_servscript_version_service_script_id = $value;
+                        }
+                    }
 
-	/**
-	 * Optimistic Lock
-	 *
-	 *
-	 *
-	 * {domain{optimistic_lock}}
-	 *
-	 * @var string Domain: optimistic_lock Type: timestamp
-	 */
-	public ?string $ss_servscript_optimistic_lock = 'now()';
+    /**
+     * Version Code
+     *
+     *
+     *
+     * {domain{version_code}}
+     *
+     * @var string|null Domain: version_code Type: varchar
+     */
+    public string|null $ss_servscript_version_code = null {
+                        get => $this->ss_servscript_version_code;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_version_code', $value);
+                            $this->ss_servscript_version_code = $value;
+                        }
+                    }
+
+    /**
+     * Version Name
+     *
+     *
+     *
+     * {domain{name}}
+     *
+     * @var string|null Domain: name Type: varchar
+     */
+    public string|null $ss_servscript_version_name = null {
+                        get => $this->ss_servscript_version_name;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_version_name', $value);
+                            $this->ss_servscript_version_name = $value;
+                        }
+                    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ss_servscript_inactive = 0 {
+                        get => $this->ss_servscript_inactive;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_inactive', $value);
+                            $this->ss_servscript_inactive = $value;
+                        }
+                    }
+
+    /**
+     * Optimistic Lock
+     *
+     *
+     *
+     * {domain{optimistic_lock}}
+     *
+     * @var string|null Domain: optimistic_lock Type: timestamp
+     */
+    public string|null $ss_servscript_optimistic_lock = 'now()' {
+                        get => $this->ss_servscript_optimistic_lock;
+                        set {
+                            $this->setFullPkAndFilledColumn('ss_servscript_optimistic_lock', $value);
+                            $this->ss_servscript_optimistic_lock = $value;
+                        }
+                    }
 }
